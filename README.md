@@ -6,6 +6,7 @@
 	Web application for secure access to book library by subscription. Alongside with decent user experience, the service provides additional functionality such as:
 - online book reader.
 - searching books by keywords, topics, authors.
+- leaving comments, book review etc.
 
 Book Recommendation System according to test results by different topics. 
 
