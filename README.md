@@ -1,11 +1,11 @@
 # Digital Worm
 
-### Web reader.
+## Web reader.
 
 **Description**:
 	Web application for secure access to book library by subscription. Alongside with decent user experience, the service provides additional functionality such as:
--online book reader.
--searching books by keywords, topics, authors.
+- online book reader.
+- searching books by keywords, topics, authors.
 
 Book Recommendation System according to test results by different topics. 
 
@@ -16,7 +16,7 @@ For security reasons, web and native applications prevent users from accessing b
  - Namazbayev Almas
  - Beisen Berik
 
-### Web application in details:
+## Web application in details:
 1. **Landing page**.
 
 Contains information about description, functions, advantages and comparison of subscription plans, payment methods. Main goal is to sell users the service.
