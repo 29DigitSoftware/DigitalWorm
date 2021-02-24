@@ -104,4 +104,4 @@ The system that encrypts all text in an epub file and stores it in the database.
 
 ### Tables structures
 
-![alt text](https://github.com/29DigitSoftware/DigitalWorm/blob/main/Database%20Schema)
+![a link](https://github.com/29DigitSoftware/DigitalWorm/blob/main/Database%20Schema)
