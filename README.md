@@ -103,3 +103,5 @@ The system that encrypts all text in an epub file and stores it in the database.
 ![alt text](https://github.com/29DigitSoftware/DigitalWorm/blob/main/29Digit-UseCase-UML.png.)
 
 ### [Tables structures](https://github.com/29DigitSoftware/DigitalWorm/blob/main/Database%20Schema)
+
+### [Link to data(csv)](https://github.com/29DigitSoftware/DigitalWorm/tree/main/data(csv))
