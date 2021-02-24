@@ -1,5 +1,47 @@
 # Digital Worm
 
+## 15 Questions that the project answers:
+
+1. How can a publisher increase the volume of sales, distribute books?
+
+2. How can a publisher protect books from piracy?
+
+3. How the publisher can add and update data about authors?
+
+4. How can a publisher publish or update books by certain authors or authors?
+
+5. How to offer interesting, necessary books to the user-offer based on the test results?
+
+6. How to stately create, edit tests, and offer books on the basis of the test results?
+
+7. How can a publisher group books by specific genres, topics, and display them in the catalog?
+
+8. How will the user save books in their library and continue reading from where they left off?
+
+9. How the user can search for books by author, by genre, by keywords in the catalog, in their library, and in a separate section?
+
+10. How the user will leave feedback (comments, likes, dislikes) about the book?
+
+11. How to provide the user with an alternative, convenient online reader?
+
+12. How can the publisher introduce the user to the services and tariffs? 
+
+13. How the user pays for the service and at what rate (for a month, for six months, for a year)?
+
+14. How can the user get acquainted with the author and see his other works?
+
+15. How the user register or log in? 
+
+![alt text](https://github.com/29DigitSoftware/DigitalWorm/blob/main/29Digit-UseCase-UML.png.)
+
+### [Tables structures](https://github.com/29DigitSoftware/DigitalWorm/blob/main/Database%20Schema)
+
+### [Link to data(csv)](https://github.com/29DigitSoftware/DigitalWorm/tree/main/data(csv))
+
+## Programming language and DBMS
+
+Vue js, Laravel, and MySQL is a time-proven combination and these technologies are easy to start and use. That's enough for our project
+
 ## Web reader.
 
 **Description**:
@@ -67,41 +109,3 @@ The online reader is based on an open source project from github. The reader acc
 11. **Parsing, encrypting, decrypting system**.
 
 The system that encrypts all text in an epub file and stores it in the database. The system also provides basic information about book description, authors and publisher.
-
-## 15 Questions that the project answers:
-
-1. How can a publisher increase the volume of sales, distribute books?
-
-2. How can a publisher protect books from piracy?
-
-3. How the publisher can add and update data about authors?
-
-4. How can a publisher publish or update books by certain authors or authors?
-
-5. How to offer interesting, necessary books to the user-offer based on the test results?
-
-6. How to stately create, edit tests, and offer books on the basis of the test results?
-
-7. How can a publisher group books by specific genres, topics, and display them in the catalog?
-
-8. How will the user save books in their library and continue reading from where they left off?
-
-9. How the user can search for books by author, by genre, by keywords in the catalog, in their library, and in a separate section?
-
-10. How the user will leave feedback (comments, likes, dislikes) about the book?
-
-11. How to provide the user with an alternative, convenient online reader?
-
-12. How can the publisher introduce the user to the services and tariffs? 
-
-13. How the user pays for the service and at what rate (for a month, for six months, for a year)?
-
-14. How can the user get acquainted with the author and see his other works?
-
-15. How the user register or log in? 
-
-![alt text](https://github.com/29DigitSoftware/DigitalWorm/blob/main/29Digit-UseCase-UML.png.)
-
-### [Tables structures](https://github.com/29DigitSoftware/DigitalWorm/blob/main/Database%20Schema)
-
-### [Link to data(csv)](https://github.com/29DigitSoftware/DigitalWorm/tree/main/data(csv))
