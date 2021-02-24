@@ -101,3 +101,7 @@ The system that encrypts all text in an epub file and stores it in the database.
 15. How the user register or log in? 
 
 ![alt text](https://github.com/29DigitSoftware/DigitalWorm/blob/main/29Digit-UseCase-UML.png.)
+
+### Tables structures
+
+![alt text](https://github.com/29DigitSoftware/DigitalWorm/blob/main/Database%20Schema)
