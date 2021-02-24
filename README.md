@@ -44,7 +44,7 @@ Page contains concise information about books grouped by the same genre or topic
 
 Page contains full information about the book such as description, authors, statistics, users comments, annotations and based on subscription users can read either a demo or full version of the book. 
 
-7.**Authors**.
+7. **Authors**.
 
 Page contains concise information about authors and their work. Also searching by author's name, specialty or even book is possible.
 
