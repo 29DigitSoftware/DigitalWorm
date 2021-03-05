@@ -1,0 +1,95 @@
+-- Answer
+LOAD DATA INFILE 'answers.csv' 
+INTO TABLE answers 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+-- author_book
+LOAD DATA INFILE 'author_book.csv' 
+INTO TABLE author_book 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+-- author_section
+LOAD DATA INFILE 'author_section.csv' 
+INTO TABLE author_section 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+-- authors
+LOAD DATA INFILE 'authors.csv' 
+INTO TABLE authors 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+-- book_section
+LOAD DATA INFILE 'book_section.csv' 
+INTO TABLE book_section 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+-- book_user
+LOAD DATA INFILE 'book_user.csv' 
+INTO TABLE book_user 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+-- books
+LOAD DATA INFILE 'books.csv' 
+INTO TABLE books 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+-- questions
+LOAD DATA INFILE 'questions.csv' 
+INTO TABLE questions 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+-- section_test
+LOAD DATA INFILE 'section_test.csv' 
+INTO TABLE section_test 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+-- sections
+LOAD DATA INFILE 'sections.csv' 
+INTO TABLE sections 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+-- tests
+LOAD DATA INFILE 'tests.csv' 
+INTO TABLE tests 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+-- users
+LOAD DATA INFILE 'users.csv' 
+INTO TABLE users 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
