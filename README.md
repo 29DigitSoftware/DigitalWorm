@@ -5,7 +5,6 @@ ER Diagram is known as Entity-Relationship Diagram, it is used to analyze to the
 - Staff maintains the book catalog  Book title, price, category(novel, general, story), edition, author Number and details.
 - A publisher has publisher Id, Year when the book was published, and name of the book.
 - Readers are registered with their  email, name (first name, last name), communication address. 
-- 
 
 ## 15 Questions that the project answers:
 
