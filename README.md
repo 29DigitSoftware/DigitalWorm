@@ -1,6 +1,11 @@
 # Digital Worm
-## 15 Questions that the project answers:
+## ER diagram
 ER Diagram is known as Entity-Relationship Diagram, it is used to analyze to the structure of the Database. It shows relationships between entities and their attributes. An ER Model provides a means of communication.
+- The system keeps track of the staff with a single point authentication system comprising login and password.
+- Staff maintains the book catalog  Book title, price, category(novel, general, story), edition, author Number and details.
+- A publisher has publisher Id, Year when the book was published, and name of the book.
+- Readers are registered with their  email, name (first name, last name), communication address. 
+- 
 
 ## 15 Questions that the project answers:
 
