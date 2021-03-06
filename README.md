@@ -1,4 +1,6 @@
 # Digital Worm
+## 15 Questions that the project answers:
+ER Diagram is known as Entity-Relationship Diagram, it is used to analyze to the structure of the Database. It shows relationships between entities and their attributes. An ER Model provides a means of communication.
 
 ## 15 Questions that the project answers:
 
