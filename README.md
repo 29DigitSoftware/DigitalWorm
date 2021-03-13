@@ -18,7 +18,7 @@ ER Diagram is known as Entity-Relationship Diagram, it is used to analyze to the
 
 5. How to offer interesting, necessary books to the user-offer based on the test results?
 
-6. How to stately create, edit tests, and offer books on the basis of the test results?
+6. How to show,  create and edit tests?
 
 7. How can a publisher group books by specific genres, topics, and display them in the catalog?
 
