@@ -1,2 +1,3 @@
 .......................
 update users table -> is Payhed 
+-> is_oayed + tarif_if
