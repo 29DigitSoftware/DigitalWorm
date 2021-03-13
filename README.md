@@ -8,7 +8,7 @@ ER Diagram is known as Entity-Relationship Diagram, it is used to analyze to the
 
 ## 15 Questions that the project answers:
 
-1. How can a publisher increase the volume of sales, distribute books?
+1. How can the publisher see the sales volume?
 
 2. How can a publisher protect books from piracy?
 
