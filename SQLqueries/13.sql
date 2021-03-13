@@ -1,1 +1,2 @@
-select * from Tarifs;
+.......................
+update users table -> is Payhed 
