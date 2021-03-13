@@ -1,2 +1,3 @@
--- How can a publisher protect books from piracy?
-select * is_payed from users where user_id = ?a
+SELECT *
+FROM users
+WHERE tarif_id IS NOT NULL;
