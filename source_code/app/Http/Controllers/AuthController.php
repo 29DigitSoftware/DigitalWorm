@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
-
 use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
     public function login(Request $request) {
         $response = [];
-        $user = User::where('email', $request->email)->first();
+        $user = (object)DB::select("select * from users where email=".$request->email." LIMIT 1");
     
         if (! $user || ! Hash::check($request->password, $user->password)) {
             $response['message'] = 'Invalid credentials';
@@ -24,7 +24,7 @@ class AuthController extends Controller
     }
 
     public function logout(Request $request) {
-        $user = User::where('email', $request->email)->first();
+        $user = (object)DB::select("select * from users where email=".$request->email." LIMIT 1");
     
         if (! $user || ! Hash::check($request->password, $user->password)) {
             $response['message'] = 'Invalid credentials';
@@ -36,7 +36,7 @@ class AuthController extends Controller
 
     public function get_token(Request $request) {
         $response = [];
-        $user = User::where('email', $request->email)->first();
+        $user = (object)DB::select("select * from users where email=".$request->email." LIMIT 1");
     
         if (! $user || ! Hash::check($request->password, $user->password)) {
             $response['message'] = 'Invalid credentials';
@@ -51,7 +51,7 @@ class AuthController extends Controller
         $request->validate([
             'email' => 'email:rfc'
         ]);
-        if (User::where([['email', '=', $request->email]])->first() != null) {
+        if (((object)DB::select("select * from users where email=".$request->email." LIMIT 1")) != null) {
             $response = ['message' => 'User already exist'];
         } else {
             $user = new User;
