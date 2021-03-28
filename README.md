@@ -1,8 +1,14 @@
 # Digital Worm
+## ER diagram
+ER Diagram is known as Entity-Relationship Diagram, it is used to analyze to the structure of the Database. It shows relationships between entities and their attributes. An ER Model provides a means of communication.
+- The system keeps track of the staff with a single point authentication system comprising login and password.
+- Staff maintains the book catalog  Book title, price, category(novel, general, story), edition, author Number and details.
+- A publisher has publisher Id, Year when the book was published, and name of the book.
+- Readers are registered with their  email, name (first name, last name), communication address. 
 
 ## 15 Questions that the project answers:
 
-1. How can a publisher increase the volume of sales, distribute books?
+1. How can a publisher see the sales volume of their book?
 
 2. How can a publisher protect books from piracy?
 
@@ -12,7 +18,7 @@
 
 5. How to offer interesting, necessary books to the user-offer based on the test results?
 
-6. How to stately create, edit tests, and offer books on the basis of the test results?
+6. How to show,  create and edit tests?
 
 7. How can a publisher group books by specific genres, topics, and display them in the catalog?
 
