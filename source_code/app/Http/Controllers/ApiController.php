@@ -62,6 +62,7 @@ class ApiController extends Controller
             $user = Auth::guard('sanctum')->user();
         }
 
+        $count = 0;
         foreach($sections as $section) {
             $section_body = [];
             if ($section -> type == 'category') {
@@ -106,6 +107,9 @@ class ApiController extends Controller
                 'sectionTitle' => $section -> title,
                 'sectionBody' => $section_body
             ]);
+
+            $count += 1;
+            if( $count > 20 ) break;
         }
 
         return response(json_encode($response, JSON_UNESCAPED_UNICODE), 200);
