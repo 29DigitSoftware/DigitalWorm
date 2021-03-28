@@ -197,21 +197,17 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c(
-          "books-scroll",
-          {
-            attrs: {
-              section: _vm.testResult.Result.sections[0],
-              isMore: "false"
-            }
-          },
-          [
-            _c("section-header", {
-              attrs: { title: "Сізге арналған кітаптар" }
-            })
-          ],
-          1
-        ),
+        _vm._l(_vm.testResult.Result.sections, function(section) {
+          return _c(
+            "books-scroll",
+            {
+              key: section.sectionTitle,
+              attrs: { books: section.sectionBody, isMore: "false" }
+            },
+            [_c("section-header", { attrs: { title: section.sectionTitle } })],
+            1
+          )
+        }),
         _vm._v(" "),
         _c(
           "div",
@@ -230,7 +226,7 @@ var render = function() {
           1
         )
       ],
-      1
+      2
     )
   ])
 }

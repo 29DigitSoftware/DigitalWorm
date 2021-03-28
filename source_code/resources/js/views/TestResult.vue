@@ -24,9 +24,9 @@
                 </div>
             </div>
 
-            <books-scroll :section="testResult.Result.sections[0]" isMore="false" >
+            <books-scroll v-for="section in testResult.Result.sections" :key="section.sectionTitle" :books="section.sectionBody" isMore="false" >
                 <section-header 
-                    title="Сізге арналған кітаптар" 
+                    :title="section.sectionTitle" 
                 />
             </books-scroll>
 

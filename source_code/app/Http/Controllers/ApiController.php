@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Book;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+
+use App\Book;
+use App\Section;
+use App\Author;
+use App\Question;
+use App\Answer;
+use App\Test;
 
 class ApiController extends Controller
 { 
@@ -15,7 +20,8 @@ class ApiController extends Controller
         if (Auth::guard('sanctum')->check()) {
             $user = Auth::guard('sanctum')->user();
         }
-        $book = (object)DB::select("select * from books where id=".$id." LIMIT 1");
+
+        $book = Book::find($id);//->first(['id', 'title', 'description', 'img', 'link']);
         if ($book == null)
             return response()->json(["message" => "Not found"], 404);
         else {
@@ -50,11 +56,11 @@ class ApiController extends Controller
 
     public function get_sections() {
         $response = ['sections' => []];
-        $sections = (object)DB::select("select * from sections where type = 'category' or type = 'authors' or type = 'tests'");
+        $sections = Section::whereIn('type', ['category', 'authors', 'tests'])->get();
         $user = null;
         if (Auth::guard('sanctum')->check()) {
             $user = Auth::guard('sanctum')->user();
-        }      
+        }
 
         $count = 0;
         foreach($sections as $section) {
@@ -78,6 +84,7 @@ class ApiController extends Controller
                 }
             } else if ($section -> type == 'authors') {
                 foreach($section->authors as $author) {
+                    if( !($author -> books()) ) continue;
                     array_push($section_body, [
                         'id' => $author -> id,
                         'name' => $author -> name, 
@@ -95,6 +102,15 @@ class ApiController extends Controller
                     ]);
                 }
             }
+
+            if($section -> type == 'tests' && count($section_body) < 1 ){
+                continue;
+            }
+
+            if( count($section_body) < 5 ){
+                continue;
+            }
+
             array_push($response['sections'], [
                 'id' => $section -> id,
                 'sectionType' => $section -> type, 
@@ -103,7 +119,8 @@ class ApiController extends Controller
             ]);
 
             $count += 1;
-            if( $count > 20 ) break;
+            if( $count > 15 )
+                break;
         }
 
         return response(json_encode($response, JSON_UNESCAPED_UNICODE), 200);
@@ -122,7 +139,7 @@ class ApiController extends Controller
             $user = Auth::guard('sanctum')->user();
         }
         
-        $section = (object)DB::select("select * from sections where id=".$id." LIMIT 1");
+        $section = Section::where([['id', '=', $id]])->first();
         if ($section == null) {
             return response()->json(["message" => "Not found"], 404);
         }
@@ -186,12 +203,12 @@ class ApiController extends Controller
             'questions' => []
         ];
 
-        $test_title = ((object)DB::select("select * from tests where id=".$id))->title;
+        $test_title = Test::find($id)->title;
         $response['title'] = $test_title;
 
-        $questions = (object)DB::select("select * from questions where test_id=".$id);
+        $questions = Question::where([['test_id', '=', $id]])->get();
         foreach($questions as $question) {
-            $answers = (object)DB::select("select id,answer,is_correct from answers where question_id=".$question->id);
+            $answers = Answer::where([['question_id', '=', $question->id]])->get(['id', 'answer', 'is_correct']);
             array_push($response['questions'], ['question' => $question -> question, 'type' => $question -> type, 'answers' => $answers]);
         }
 
@@ -202,11 +219,12 @@ class ApiController extends Controller
      * function that return authors info and their books
      */
     public function author_info($id) {
-        $author = (object)DB::select("select * from authors where id=".$id." LIMIT 1");
+        $author = Author::where([['id', '=', $id]])->first();
         
         if ($author == null) {
             return response()->json(["message" => "Not found"], 404);
         }
+
         $user = null;
         if (Auth::guard('sanctum')->check()) {
             $user = Auth::guard('sanctum')->user();
@@ -361,4 +379,3 @@ class ApiController extends Controller
         return response(json_encode($response, JSON_UNESCAPED_UNICODE), 200);
     }
 }
-
