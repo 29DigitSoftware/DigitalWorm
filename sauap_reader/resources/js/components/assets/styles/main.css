@@ -1,0 +1,207 @@
+body {
+    letter-spacing: 0px;
+    color: #4B4B4B;
+}
+
+.wrapper {
+    position: absolute;
+    margin: 0 auto;
+    height: 100vh;
+    width: 100vw;
+    padding: 0px 10px;
+    overflow-x: hidden;
+    background: white;
+}
+
+.component-title {
+    float: left;
+    font: Condensed Bold 10px/12px 'Nunito';
+    font-size: 16px;
+    letter-spacing: 0px;
+    color: #4B4B4B;
+    opacity: 1;
+    margin: 0;
+    text-transform: uppercase;
+    margin-left: 8px;
+}
+
+.items_container {
+    padding-top: 5px;
+    margin: 16px 0 0 0;
+    overflow-x: hidden;
+}
+
+.horizontal-scroll {
+    display: flex;
+    flex: 1;
+    flex-flow: row nowrap;
+    align-items: center;
+    width: auto;
+    margin-top: 10px;
+    margin-bottom: 8px;
+    /* margin-right: 10px; */
+    padding-bottom: 8px;
+    padding-left: 16px;
+}
+
+.outer {
+    height: 100%;
+    padding: 0;
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.inner-content {
+    overflow: hidden;
+    position: relative;
+    margin: 0px 0px 0px 0px;
+    box-shadow: 0px 4px 7px #00000029;
+    background-position: center;
+    /* Center the image */
+    background-repeat: no-repeat;
+    /* Do not repeat the image */
+    background-size: cover;
+}
+
+.inner-content:not(:first-of-type) {
+    margin-left: 13px;
+}
+
+.inner-content:last-of-type {
+    margin-right: 13px;
+}
+
+@keyframes placeHolderShimmer {
+    0% {
+        background-position: -468px 0
+    }
+    100% {
+        background-position: 468px 0
+    }
+}
+
+.animated-background {
+    animation-duration: 2.5s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 3;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background: darkgray;
+    background: linear-gradient(to right, #eeeeee 10%, #dddddd 18%, #eeeeee 33%);
+    background-size: 800px 104px;
+    position: relative;
+    height: 100px;
+}
+
+
+/* Views / kokzhiek, authors, tests */
+
+.main_page {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    background: white;
+    overflow-x: hidden;
+}
+
+.header-container {
+    margin-bottom: 5%;
+}
+
+.book_container {
+    margin: 0 0 0 16px;
+    overflow-x: hidden;
+}
+
+.green {
+    background: #3C6E71 !important;
+    color: #3C6E71;
+}
+
+.first {
+    background: #B6143D !important;
+    color: #B6143D;
+}
+
+.second {
+    background: #e6a526 !important;
+    color: #e6a526;
+}
+
+.third {
+    background: #1cade2 !important;
+    color: #1cade2;
+}
+
+.fourth {
+    background: #d36a43 !important;
+    color: #d36a43;
+}
+
+.green-text {
+    color: #3C6E71;
+}
+
+.first-text {
+    color: #B6143D !important;
+}
+
+.second-text {
+    color: #e6a526;
+}
+
+.third-text {
+    color: #1cade2;
+}
+
+.fourth-text {
+    color: #d36a43;
+}
+
+.black {
+    color: black !important;
+}
+
+.black:focus,
+.black:hover {
+    color: #3C6E71 !important;
+}
+
+.white {
+    color: white !important;
+}
+
+.white:focus,
+.white:hover {
+    color: #353535 !important;
+}
+
+.white_text {
+    color: white !important;
+}
+
+.white_bg {
+    background: white !important;
+}
+
+
+/* test process animation */
+
+.slide-fade-enter-active {
+    transition: all .3s ease;
+}
+
+.slide-fade-leave-active {
+    transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.slide-fade-enter,
+.slide-fade-leave-to
+/* .slide-fade-leave-active for <2.1.8 */
+
+{
+    transform: translateX(30px);
+    opacity: 0;
+}

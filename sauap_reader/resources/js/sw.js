@@ -1,0 +1,35 @@
+if (!self.define) {
+    const e = e => {
+            "require" !== e && (e += ".js");
+            let s = Promise.resolve();
+            return o[e] || (s = new Promise((async s => {
+                if ("document" in self) {
+                    const o = document.createElement("script");
+                    o.src = e, document.head.appendChild(o), o.onload = s
+                } else importScripts(e), s()
+            }))), s.then((() => { if (!o[e]) throw new Error(`Module ${e} didn’t register its module`); return o[e] }))
+        },
+        s = (s, o) => { Promise.all(s.map(e)).then((e => o(1 === e.length ? e[0] : e))) },
+        o = { require: Promise.resolve(s) };
+    self.define = (s, n, c) => {
+        o[s] || (o[s] = Promise.resolve().then((() => {
+            let o = {};
+            const i = { uri: location.origin + s.slice(1) };
+            return Promise.all(n.map((s => {
+                switch (s) {
+                    case "exports":
+                        return o;
+                    case "module":
+                        return i;
+                    default:
+                        return e(s)
+                }
+            }))).then((e => { const s = c(...e); return o.default || (o.default = s), o }))
+        })))
+    }
+}
+define("./sw.js", ["./workbox-8f0eb220"], (function(e) {
+    "use strict";
+    self.addEventListener("message", (e => { e.data && "SKIP_WAITING" === e.data.type && self.skipWaiting() })), e.precacheAndRoute([{ url: "app.js", revision: "3045f5631973b67a8cd5816848e16803" }, { url: "App.vue", revision: "f375559e83f01ef687773ef3fc446efa" }, { url: "assets/logo.png", revision: "82b9c7a5a3f405032b1db71a25f67021" }, { url: "assets/styles/fonts/icomoon.eot", revision: "5a0368163c844becca744b3a158997f9" }, { url: "assets/styles/fonts/icomoon.svg", revision: "05a6e78b76fa51ee4b748cb9e4447f59" }, { url: "assets/styles/fonts/icomoon.ttf", revision: "ebef17fc47df4cf594633c59cf1cd74b" }, { url: "assets/styles/fonts/icomoon.woff", revision: "4c1eacbb667ea3da70a62619ecd6e190" }, { url: "assets/styles/global.scss", revision: "2865c8bcdd6a7d3d285293a8ae11ec2b" }, { url: "assets/styles/icon.css", revision: "aeaf64fc620f136e8e8eebcdd6ae7ef7" }, { url: "assets/styles/reset.scss", revision: "51ae5dbea54e748ca131a399cae47937" }, { url: "books/100_hadis20.epub", revision: "d3dc4ab5ddb7f9fdb9fd4f2283f4b2bd" }, { url: "bootstrap.js", revision: "f6a590de0ed0165e4889a320d2d11204" }, { url: "components/About.vue", revision: "fd0dc2dd458f4feabeed9ea6fbf7d9c3" }, { url: "components/assets/img/accept.svg", revision: "6a980989040b5eec3bb1f2bdeecc772c" }, { url: "components/assets/img/book.svg", revision: "9cc3fa82f8491150fa6b99c07d18f83c" }, { url: "components/assets/img/books.svg", revision: "029ba3370752988a5accf911b92c50fe" }, { url: "components/assets/img/like.svg", revision: "f272194f79bddb85399f7d53fcb30ed1" }, { url: "components/assets/logo.png", revision: "82b9c7a5a3f405032b1db71a25f67021" }, { url: "components/assets/styles/fonts/icomoon.eot", revision: "5a0368163c844becca744b3a158997f9" }, { url: "components/assets/styles/fonts/icomoon.svg", revision: "05a6e78b76fa51ee4b748cb9e4447f59" }, { url: "components/assets/styles/fonts/icomoon.ttf", revision: "ebef17fc47df4cf594633c59cf1cd74b" }, { url: "components/assets/styles/fonts/icomoon.woff", revision: "4c1eacbb667ea3da70a62619ecd6e190" }, { url: "components/assets/styles/global.scss", revision: "02f4738ed051eacd0f41d22e98aeb3c3" }, { url: "components/assets/styles/icon.css", revision: "aeaf64fc620f136e8e8eebcdd6ae7ef7" }, { url: "components/assets/styles/main.css", revision: "8fd596ca7f6f68e0b212f65d420be8bc" }, { url: "components/assets/styles/reset.scss", revision: "51ae5dbea54e748ca131a399cae47937" }, { url: "components/bookInfo_compressed.vue", revision: "b0e793aec3ee23ff0f9e3059babfdce6" }, { url: "components/bookInfo.vue", revision: "1b8a38455e8d7d3b0c6b2874db8dd6f4" }, { url: "components/BookTree.vue", revision: "078b72e4a20baecd79b57ce685a77b6a" }, { url: "components/CheckEpubParser.vue", revision: "d41d8cd98f00b204e9800998ecf8427e" }, { url: "components/colored-header.vue", revision: "18c7d33c095cdb41deb8f18cbcb26314" }, { url: "components/config/CONST.js", revision: "9d573f1d8e4630fba8e25bf379e2b376" }, { url: "components/custom-header.vue", revision: "ac88d2db3601dcf4892c020fc8f14603" }, { url: "components/customSubmitButton.vue", revision: "3a87a786f0b378a8d57ddd76eefdfd9c" }, { url: "components/ExampleComponent.vue", revision: "77773cae01136ffd5389e2740ea367c9" }, { url: "components/Home.vue", revision: "973b4a96540060e5d3927184331fae6c" }, { url: "components/HorizontalAuthorInfo.vue", revision: "d9ab1661cf147efa73d7074a8d95e721" }, { url: "components/HorizontalAuthorsSlider.vue", revision: "20b855cb17a854fcc7abba5b440db8a3" }, { url: "components/HorizontalBooksSlider.vue", revision: "a3e383e2148624183cc59a701ecad94d" }, { url: "components/HorizontalGenresSlider.vue", revision: "f13d5021d486d651a65581f357b0ca7a" }, { url: "components/HorizontalTestsSlider.vue", revision: "f4e761d878e58c6491cb9abb6120f553" }, { url: "components/NotFound.vue", revision: "9c7c9dd5c7260aff470b765391ac2392" }, { url: "components/quizExample.vue", revision: "4c5c3a76bae3741c754aa1ae087888a0" }, { url: "components/Reader.vue", revision: "6b6b4a1375414ec06c2ec58bde0ea744" }, { url: "components/ReaderComponents/ContentView.vue", revision: "eaeaacfd819a92ae4c079eec19a5d424" }, { url: "components/ReaderComponents/MenuBar.vue", revision: "9def067504d23faf7c59a4ba752b1a6f" }, { url: "components/ReaderComponents/TitleBar.vue", revision: "144d015ec3833bd60c807d44adabb92b" }, { url: "components/test_item.vue", revision: "469e1e656a99563f15c4a2f891bceee7" }, { url: "components/timer.vue", revision: "88c430f1f9753e103813ba928743707d" }, { url: "router/index.js", revision: "ebd8813279e7accc7d91c694283cf25c" }, { url: "router/routes.js", revision: "ea2bd46d33cc08ab552a7042d4015a7f" }, { url: "store/index.js", revision: "5df17e93a60954fde52a08b1d1d702a3" }, { url: "views/Author_info.vue", revision: "f208e287eba0e9b09c8cbcd06ae1892d" }, { url: "views/Authors.vue", revision: "b1d0d34edb5a88a325f662e07af1d4b6" }, { url: "views/bookInfo.vue", revision: "b9703a7afa2b02cba8d6747a203a7a25" }, { url: "views/Books.vue", revision: "0416989aefe792db03abf979ff323853" }, { url: "views/Find.vue", revision: "88562d0be8dcdd9a15e2554022bed416" }, { url: "views/KokzhiekAlemi.vue", revision: "9b20f4cb0f19504e8a42ac26571e56ae" }, { url: "views/Search.vue", revision: "d55f61e58b75d4970ed4de55ce7da430" }, { url: "views/test_intro.vue", revision: "47046a96e7681dba12e8e6e302d1b8c1" }, { url: "views/test_process.vue", revision: "71f266cdbbf30560682234e0900a86d6" }, { url: "views/test_result.vue", revision: "f05d15bcda0b20919b6f39d302d276f5" }, { url: "views/Tests.vue", revision: "9b493c2eaf026a3134e1343204dda338" }], {})
+}));
+//# sourceMappingURL=sw.js.map
