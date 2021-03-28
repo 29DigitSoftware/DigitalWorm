@@ -2,45 +2,45 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-
 use App\Book;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SearchController extends Controller
 {
     public function get_search_from_books(Request $req) {
-        $books = Book::where('title', 'like', '%' . $req->input('fragment') . '%')->get();
+        $books = (object)DB::select("select * from books where description like %".$req->input('fragment')."% or title like %".$req->input('fragment')."%");
         if ($req->input('fragment') == null)
             return response()->json(["message" => "Not found"], 404);
         elseif($books-> isEmpty())
             return response()->json(["message" => "Not found"], 404);
-        else {
-            $response = [
-                'body' => []
-            ];
-            $user = null;
-            if (Auth::guard('sanctum')->check()) {
-                $user = Auth::guard('sanctum')->user();
-            }
-
-            foreach($books as $book){
-                $data = [
-                    'id' => $book -> id,
-                    'title' => $book -> title, 
-                    'author' => $book->authors_name()[0],
-                    'description' => $book -> description,
-                    'img' => $book -> img
+            else {
+                $response = [
+                    'body' => []
                 ];
-                if ($user != null) {
-                    if ($user->hasBook($book))
-                        $data['is_added'] = true;
-                    else
-                        $data['is_added'] = false;
+                $user = null;
+                if (Auth::guard('sanctum')->check()) {
+                    $user = Auth::guard('sanctum')->user();
                 }
-                array_push($response['body'], $data);
+    
+                foreach($books as $book){
+                    $data = [
+                        'id' => $book -> id,
+                        'title' => $book -> title, 
+                        'author' => $book->authors_name()[0],
+                        'description' => $book -> description,
+                        'img' => $book -> img
+                    ];
+                    if ($user != null) {
+                        if ($user->hasBook($book))
+                            $data['is_added'] = true;
+                        else
+                            $data['is_added'] = false;
+                    }
+                    array_push($response['body'], $data);
+                }
+                return response(json_encode($response, JSON_UNESCAPED_UNICODE), 200);
             }
-            return response(json_encode($response, JSON_UNESCAPED_UNICODE), 200);
         }
     }
-}
+    
