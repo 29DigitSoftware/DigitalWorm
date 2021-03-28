@@ -1,4 +1,14 @@
 # Digital Worm
+
+## Phase 6
+
+link to working website
+https://digitalworm.prosthesis.kz/
+- Register to read the book, manipulate library
+
+Epub reader was taken from 
+https://github.com/FannieShi/vue-reader
+
 ## ER diagram
 ER Diagram is known as Entity-Relationship Diagram, it is used to analyze to the structure of the Database. It shows relationships between entities and their attributes. An ER Model provides a means of communication.
 - The system keeps track of the staff with a single point authentication system comprising login and password.
