@@ -8534,6 +8534,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -14229,7 +14233,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.chips[data-v-e7b7e8f2]{\n    display: flex;\n    align-items: center;\n    flex: 1;\n    flex-flow: row wrap;\n    margin: 0;\n    padding: 0;\n}\n.chip[data-v-e7b7e8f2] {\n    display: flex;\n    align-items: center;\n    padding:5px 15px;\n    height: auto;\n    font-size: 50px;\n    line-height: 50px;\n    border: 1px solid #3C6E71;\n    border-radius: 6px;\n    opacity: 1;\n    margin : 5px;\n}\n.chip p[data-v-e7b7e8f2]{\n    margin:0px;\n    text-align: center;\n    font: Condensed Bold 9px/11px Nunito;\n    letter-spacing: 0px;\n    color: #3C6E71;\n    text-transform: lowercase;\n    opacity: 1;\n}\n", ""]);
+exports.push([module.i, "\n.counter[data-v-e7b7e8f2] {\n    margin: 12px 24px;\n}\n", ""]);
 
 // exports
 
@@ -52033,6 +52037,16 @@ var render = function() {
     { staticClass: "wrapper", attrs: { id: "search" } },
     [
       _c("customHeader", { attrs: { title: "Іздеу", Search: "true" } }),
+      _vm._v(" "),
+      _vm.searchResult
+        ? _c("h1", { staticClass: "counter" }, [
+            _vm._v(
+              " \n        Табылды: " +
+                _vm._s(_vm.searchResult.body.length) +
+                "    \n     "
+            )
+          ])
+        : _vm._e(),
       _vm._v(" "),
       _vm.searchResult
         ? _c("books-collection", { attrs: { Content: _vm.searchResult.body } })

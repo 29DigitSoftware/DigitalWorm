@@ -6,6 +6,10 @@
             Search="true" 
         />
 
+        <h1 class="counter" v-if="searchResult" > 
+            Табылды: {{ searchResult.body.length }}    
+         </h1>
+
         <books-collection 
             v-if="searchResult"
             :Content="searchResult.body"
@@ -83,33 +87,7 @@
 
 <style scoped>
 
-    .chips{
-        display: flex;
-        align-items: center;
-        flex: 1;
-        flex-flow: row wrap;
-        margin: 0;
-        padding: 0;
-    }
-    .chip {
-        display: flex;
-        align-items: center;
-        padding:5px 15px;
-        height: auto;
-        font-size: 50px;
-        line-height: 50px;
-        border: 1px solid #3C6E71;
-        border-radius: 6px;
-        opacity: 1;
-        margin : 5px;
-    }
-    .chip p{
-        margin:0px;
-        text-align: center;
-        font: Condensed Bold 9px/11px Nunito;
-        letter-spacing: 0px;
-        color: #3C6E71;
-        text-transform: lowercase;
-        opacity: 1;
+    .counter {
+        margin: 12px 24px;
     }
 </style>
