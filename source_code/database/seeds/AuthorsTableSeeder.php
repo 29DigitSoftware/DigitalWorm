@@ -35,23 +35,5 @@ class AuthorsTableSeeder extends Seeder
             $book = Book::find($key);
             $author->books()->attach($book);
         }
-        /*
-        $names = ["Abylay", "Bekzat", "Nauka"];
-        $surnames = ['Omar', 'Yernat', 'Sapargali'];
-        $titles = ['Дінтанушы', 'Блоггер', 'Мезунжы'];
-
-        for ($i = 0, $j = 1; $i < count($names); $i++, $j++) {
-            $author = new Author;
-            $author -> name = $names[$i];
-            $author -> surname = $surnames[$i];
-            $author -> title = $titles[$i];
-            $author -> save();
-            
-            $book = Book::find(rand(1, 72));
-            $author->books()->attach($book);
-            $book = Book::find(rand(1, 72));
-            $author->books()->attach($book);
-        }
-        */
     }
 }
