@@ -6,6 +6,12 @@ link to working website
 https://digitalworm.prosthesis.kz/
 - Register to read the book, manipulate library
 
+Admin panel
+http://digitalworm.prosthesis.kz/admins
+you can use 
+email: a@a.com, 
+password: a
+
 Epub reader was taken from 
 https://github.com/FannieShi/vue-reader
 
