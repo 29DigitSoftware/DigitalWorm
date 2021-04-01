@@ -70,7 +70,6 @@ class SectionsTableSeeder extends Seeder
     {
         $file = fopen('database/seeds/data/section.csv', 'r');
         $first_line = 0;
-        $first_line = 0;
         while (($line = fgetcsv($file)) !== FALSE) {
 
             if( $first_line == 0 ){
@@ -86,8 +85,7 @@ class SectionsTableSeeder extends Seeder
         }
         fclose($file);
     
-        $file = fopen('database/seeds/data/section_authors.csv', 'r');
-        $first_line = 0;
+        $file = fopen('database/seeds/data/section_author.csv', 'r');
         $first_line = 0;
         while (($line = fgetcsv($file)) !== FALSE) {
 
@@ -96,8 +94,8 @@ class SectionsTableSeeder extends Seeder
                 continue;
             }
             // print_r($line);
-            $section = Section::find($line[0]);
-            $author = Author::find($line[1]);
+            $section = Section::find($line[1]);
+            $author = Author::find($line[2]);
             
             $section -> type = 'authors';
             $section->authors()->attach($author);
@@ -106,8 +104,7 @@ class SectionsTableSeeder extends Seeder
         }
         fclose($file);
 
-        $file = fopen('database/seeds/data/section_books.csv', 'r');
-        $first_line = 0;
+        $file = fopen('database/seeds/data/section_book.csv', 'r');
         $first_line = 0;
         while (($line = fgetcsv($file)) !== FALSE) {
 
@@ -116,8 +113,8 @@ class SectionsTableSeeder extends Seeder
                 continue;
             }
             // print_r($line);
-            $section = Section::find($line[0]);
-            $book = Book::find($line[1]);
+            $section = Section::find($line[1]);
+            $book = Book::find($line[2]);
             
             $section -> type = 'category';
             $section->books()->attach($book);
