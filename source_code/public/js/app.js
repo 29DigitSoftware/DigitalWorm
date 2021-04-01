@@ -5303,15 +5303,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return;
       }
 
+      var id = this.Content.id;
+      id = Math.max(id % 101, 1);
       this.$router.push({
         name: 'reader',
         query: {
           key: 'iCbhghNqcNM4QStD4vMxDT9pKqm8bdHGPC3totrQFdA=',
-          id: this.Content.id,
+          id: id,
           progress: this.Content.progress
         },
         params: {
-          id: this.Content.id,
+          id: id,
           progress: this.Content.progress
         }
       });
