@@ -68,7 +68,7 @@ class SectionsTableSeeder extends Seeder
 
     public function run()
     {
-        $file = fopen('database/seeds/data/sections.csv', 'r');
+        $file = fopen('database/seeds/data/section.csv', 'r');
         $first_line = 0;
         $first_line = 0;
         while (($line = fgetcsv($file)) !== FALSE) {
@@ -106,31 +106,6 @@ class SectionsTableSeeder extends Seeder
         }
         fclose($file);
 
-        $file = fopen('database/seeds/data/section_author.csv', 'r');
-        $first_line = 0;
-        $first_line = 0;
-        while (($line = fgetcsv($file)) !== FALSE) {
-
-            if( $first_line == 0 ){
-                $first_line = 1;
-                continue;
-            }
-            // print_r($line);
-            $section = Section::find($line[0]);
-            $section -> type = 'author';
-
-            $author = Author::find($line[1]);        
-            $section -> title = $author -> name . ' ' . $author -> surname;
-
-            $books = $author -> books();
-            foreach($books as $book) {
-                $section -> books() -> attach($book);
-            }
-
-            $section -> save();
-        }
-        fclose($file);
-
         $file = fopen('database/seeds/data/section_books.csv', 'r');
         $first_line = 0;
         $first_line = 0;
@@ -151,27 +126,6 @@ class SectionsTableSeeder extends Seeder
         }
         fclose($file);
 
-        $file = fopen('database/seeds/data/section_tests.csv', 'r');
-        $first_line = 0;
-        $first_line = 0;
-        while (($line = fgetcsv($file)) !== FALSE) {
-
-            if( $first_line == 0 ){
-                $first_line = 1;
-                continue;
-            }
-            // print_r($line);
-            $section = Section::find($line[0]);
-            $test = Test::find($line[1]);
-            if( $test == null )
-                continue;
-
-            $section -> type = 'tests';
-            $section->tests()->attach($test);
-            
-            $section -> save();
-        }
-        fclose($file);
     }
 
 }

@@ -19,8 +19,9 @@ class UserTableSeeder extends Seeder
             'password' => Hash::make("123")
         ]);
 
+        $used = [];
+
         $file = fopen('database/seeds/data/users.csv', 'r');
-        $first_line = 0;
         $first_line = 0;
         while (($line = fgetcsv($file)) !== FALSE) {
 
@@ -29,10 +30,17 @@ class UserTableSeeder extends Seeder
                 continue;
             }
 
-        $check = User::where('email', '=', $line[2]);
-            if($check != null) {
+            $isInUsed = false;
+            foreach($used as $email){
+                if( $line[2] == $email ){
+                    $isInUsed = true;
+                    break;
+                }
+            }
+            if( $isInUsed == false )
+                array_push( $used, $line[2] );
+            else    
                 continue;
-            }  
 
             // print_r($line);
             $user = new User;
@@ -40,7 +48,7 @@ class UserTableSeeder extends Seeder
             $user -> email = $line[2];
             // $user -> device_id = $line[3];
             // $user -> email_verified = $line[4];
-            $user -> password = $line[5];
+            $user -> password = Hash::make($line[5]);
             // $user -> remember_token = $line[6];
             $user -> save();
         }
