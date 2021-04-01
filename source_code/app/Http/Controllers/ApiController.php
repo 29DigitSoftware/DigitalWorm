@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-
 use App\Book;
-use App\Section;
-use App\Author;
-use App\Question;
-use App\Answer;
 use App\Test;
+
+use App\Answer;
+use App\Author;
+use App\Section;
+use App\Question;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ApiController extends Controller
 { 
@@ -21,7 +22,7 @@ class ApiController extends Controller
             $user = Auth::guard('sanctum')->user();
         }
 
-        $book = Book::find($id);//->first(['id', 'title', 'description', 'img', 'link']);
+        $book = (object)DB::select("select * from books where id=".$id." LIMIT 1");
         if ($book == null)
             return response()->json(["message" => "Not found"], 404);
         else {
@@ -56,7 +57,7 @@ class ApiController extends Controller
 
     public function get_sections() {
         $response = ['sections' => []];
-        $sections = Section::whereIn('type', ['category', 'authors', 'tests'])->get();
+        $sections = (object)DB::select("select * from sections where type = 'category' or type = 'authors' or type = 'tests'");
         $user = null;
         if (Auth::guard('sanctum')->check()) {
             $user = Auth::guard('sanctum')->user();
@@ -139,7 +140,7 @@ class ApiController extends Controller
             $user = Auth::guard('sanctum')->user();
         }
         
-        $section = Section::where([['id', '=', $id]])->first();
+        $section = (object)DB::select("select * from sections where id=".$id." LIMIT 1");
         if ($section == null) {
             return response()->json(["message" => "Not found"], 404);
         }
@@ -203,12 +204,12 @@ class ApiController extends Controller
             'questions' => []
         ];
 
-        $test_title = Test::find($id)->title;
+        $test_title = ((object)DB::select("select * from tests where id=".$id))->title;
         $response['title'] = $test_title;
 
-        $questions = Question::where([['test_id', '=', $id]])->get();
+        $questions = (object)DB::select("select * from questions where test_id=".$id);
         foreach($questions as $question) {
-            $answers = Answer::where([['question_id', '=', $question->id]])->get(['id', 'answer', 'is_correct']);
+            $answers = (object)DB::select("select 'id', 'answer', 'is_correct' from answers where question_id=".$question->id);
             array_push($response['questions'], ['question' => $question -> question, 'type' => $question -> type, 'answers' => $answers]);
         }
 
@@ -219,7 +220,7 @@ class ApiController extends Controller
      * function that return authors info and their books
      */
     public function author_info($id) {
-        $author = Author::where([['id', '=', $id]])->first();
+        $author = (object)DB::select("select * from authors where id=".$id." LIMIT 1");
         
         if ($author == null) {
             return response()->json(["message" => "Not found"], 404);
@@ -277,7 +278,7 @@ class ApiController extends Controller
         $response = [
             'message' => ''
         ];
-        $book = Book::find($request -> book_id);
+        $book = (object)DB::select("select * from books where id =".$request -> book_id);
 
         if ($book == null) {
             $response['message'] = 'No such book';
@@ -301,7 +302,7 @@ class ApiController extends Controller
         $response = [
             'message' => ''
         ];
-        $book = Book::find($request -> book_id);
+        $book = (object)DB::select("select * from books where id =".$request -> book_id);
 
         if ($book == null) {
             $response['message'] = 'No such book';
@@ -322,7 +323,7 @@ class ApiController extends Controller
         Save book progress
     */
     public function book_progress(Request $request) {
-        $book = Book::find($request -> book_id);
+        $book = (object)DB::select("select * from books where id =".$request -> book_id);
 
         if ($book == null) {
             $response['message'] = 'No such book';
@@ -346,7 +347,7 @@ class ApiController extends Controller
      */
     public function get_book_progress(Request $request) {
         dd($request);
-        $book = Book::find($request -> book_id);
+        $book = (object)DB::select("select * from books where id =".$request -> book_id);
 
         if ($book == null) {
             $response['message'] = 'No such book';

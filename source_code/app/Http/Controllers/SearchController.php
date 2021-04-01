@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-
 use App\Book;
+use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class SearchController extends Controller
 {
-    public function get_search_from_books(Request $req) {
-        $books = Book::where('title', 'like', '%' . $req->input('fragment') . '%')->get();
+    public function get_search_from_books(Request $req)
+    {
+        $books = (object)DB::select("select * from books where description like %" . $req->input('fragment') . "% or title like %" . $req->input('fragment') . "%");
         if ($req->input('fragment') == null)
             return response()->json(["message" => "Not found"], 404);
-        elseif($books-> isEmpty())
+        elseif ($books->isEmpty())
             return response()->json(["message" => "Not found"], 404);
         else {
             $response = [
@@ -24,13 +26,13 @@ class SearchController extends Controller
                 $user = Auth::guard('sanctum')->user();
             }
 
-            foreach($books as $book){
+            foreach ($books as $book) {
                 $data = [
-                    'id' => $book -> id,
-                    'title' => $book -> title, 
+                    'id' => $book->id,
+                    'title' => $book->title,
                     'author' => $book->authors_name()[0],
-                    'description' => $book -> description,
-                    'img' => $book -> img
+                    'description' => $book->description,
+                    'img' => $book->img
                 ];
                 if ($user != null) {
                     if ($user->hasBook($book))
