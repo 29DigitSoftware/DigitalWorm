@@ -11,7 +11,6 @@
                 ref="search"
                 v-model.trim="fragment"
                 
-                @input="search()"
             >
             <input 
                 v-else
@@ -21,10 +20,20 @@
                 placeholder="Іздеу..." 
                 aria-label="Search"
                 
-                @click="navigate()"
+                @click="navigate"
             >
-            <!-- <button type="button" class="btn btn-link question"><i class="fas fa-question"></i></button> -->
+            <button 
+                v-if="Search"
+                type="button" 
+                class="btn mt-4 float-right"
+
+                @click="search"
+            >
+                Search
+            </button>
         </div>
+
+
     </div>
 </template>
 

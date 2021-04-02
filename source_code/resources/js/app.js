@@ -10,6 +10,9 @@ import './assets/styles/global.scss'
 import App from './App.vue'
 import ReadMore from 'vue-read-more';
 import NProgress from 'vue-nprogress'
+import ScrollLoader from 'vue-scroll-loader'
+
+Vue.use(ScrollLoader)
 
 Vue.use(touch);
 Vue.use(ReadMore);

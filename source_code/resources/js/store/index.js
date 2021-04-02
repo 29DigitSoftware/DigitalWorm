@@ -119,6 +119,7 @@ const mainPageModule = {
         // base_url: 'https://reader.prosthesis.kz/api/',
 
         searchResult: null,
+        searchFragment: null,
         errorMessage: '',
         errors: [],
 
@@ -167,8 +168,18 @@ const mainPageModule = {
             state.searchResult = null;
             state.SectionLoaded = false;
         },
+        setSearchFragment(state, data) {
+            state.searchFragment = data;
+        },
         setSearchResult(state, data) {
             console.log(data)
+            state.searchResult = data;
+        },
+        addSearchResult(state, data) {
+            console.log(data)
+            let oldData = state.searchResult.data.body;
+            oldData = oldData.concat(data.data.body)
+            data.data.body = oldData;
             state.searchResult = data;
         },
         retrieveToken(state, token) {
@@ -235,8 +246,25 @@ const mainPageModule = {
             const searchFragment = {
                 'fragment': fragment,
             };
+            commit('setSearchFragment', searchFragment);
             axios.post('/api/search', searchFragment)
                 .then(response => commit("setSearchResult", response.data))
+                .catch(error => {
+                    commit("setErrorMessage", 'Ештене табылмады');
+                    commit("setSearchResult", null)
+                    commit("setSearchFragment", null)
+                    console.error("There was an error!", error);
+                });
+
+        },
+        searchPagination({
+            commit,
+            state
+        }) {
+
+            if (state.searchFragment)
+                axios.post(state.searchResult.next_page_url, state.searchFragment)
+                .then(response => commit("addSearchResult", response.data))
                 .catch(error => {
                     commit("setErrorMessage", 'Ештене табылмады');
                     commit("setSearchResult", null)

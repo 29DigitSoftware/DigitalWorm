@@ -7,15 +7,20 @@
         />
 
         <h1 class="counter" v-if="searchResult" > 
-            Табылды: {{ searchResult.body.length }}    
+            Табылды: {{ searchResult.total }}    
          </h1>
 
         <books-collection 
             v-if="searchResult"
-            :Content="searchResult.body"
+            :Content="searchResult.data.body"
         />
 
         <p v-else class="text-center"> {{errorMessage}} </p>
+
+
+        <scroll-loader 
+            :loader-method="searchPagination" 
+        />
 
         <!-- <div class="container">
             <div>
@@ -58,7 +63,7 @@
 
 <script>
 
-    import {mapGetters, mapMutations} from 'vuex';
+    import {mapGetters, mapMutations, mapActions} from 'vuex';
 
     import customHeader from '../components/custom-header';
     import BooksCollection from '../components/books-collection.vue';
@@ -70,6 +75,7 @@
         },
         methods: {
             ...mapMutations(['setErrorMessage']),
+            ...mapActions(['searchPagination']),
 
         },
         components: {
@@ -88,6 +94,8 @@
 <style scoped>
 
     .counter {
-        margin: 12px 24px;
+        margin: 24px 24px;
+        color: #3C6E71;
+        font-weight: bold;
     }
 </style>
