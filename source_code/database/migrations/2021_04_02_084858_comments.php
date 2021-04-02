@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Books extends Migration
+class Comments extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class Books extends Migration
      */
     public function up()
     {
-        Schema::create("books", function(Blueprint $table) {
+        Schema::create("comments", function(Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->text('description')->nullable();
-            $table->string("link")->nullable();
-            $table->string("img")->nullable();
+            $table->integer('book_id')->unsigned();
+            $table->integer('user_id')->unsigned();
+            $table->text('body')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class Books extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('books');
+        Schema::dropIfExists('comments');
     }
 }

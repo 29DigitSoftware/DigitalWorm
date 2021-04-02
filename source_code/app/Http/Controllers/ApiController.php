@@ -2,13 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Book;
-use App\Test;
-
-use App\Answer;
-use App\Author;
-use App\Section;
-use App\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -58,6 +51,7 @@ class ApiController extends Controller
     public function get_sections() {
         $response = ['sections' => []];
         $sections = (object)DB::select("select * from sections where type = 'category' or type = 'authors' or type = 'tests'");
+        $sections = Section::whereIn('type', ['category', 'authors', 'tests'])->get();
         $user = null;
         if (Auth::guard('sanctum')->check()) {
             $user = Auth::guard('sanctum')->user();
