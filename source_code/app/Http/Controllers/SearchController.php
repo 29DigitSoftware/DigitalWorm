@@ -42,7 +42,9 @@ class SearchController extends Controller
                 }
                 array_push($response['body'], $data);
             }
-            return response(json_encode($response, JSON_UNESCAPED_UNICODE), 200);
+
+            $books['body'] = $response['body'];
+            return response(json_encode($books, JSON_UNESCAPED_UNICODE), 200);
         }
     }
 }
