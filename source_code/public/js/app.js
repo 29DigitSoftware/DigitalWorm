@@ -51180,13 +51180,9 @@ var staticRenderFns = [
               _c("div", { staticClass: "copyright-txt" }, [
                 _c("span", [
                   _vm._v("Барлық құқық қорғалған ©2021 "),
-                  _c(
-                    "a",
-                    {
-                      attrs: { href: "https://sauapsoft.kz", target: "_blank" }
-                    },
-                    [_vm._v("SauapSoft")]
-                  ),
+                  _c("a", {
+                    attrs: { href: "https://sauapsoft.kz", target: "_blank" }
+                  }),
                   _vm._v(".\n                        ")
                 ])
               ])
