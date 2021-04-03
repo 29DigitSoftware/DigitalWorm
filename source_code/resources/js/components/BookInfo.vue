@@ -102,6 +102,8 @@
             </div>
 
         </div>
+
+        <comments-section />
     </div>
 
 </template>
@@ -111,6 +113,7 @@
     import BackButtonItem from '../components/items/back-button-item'
     import ButtonItem from '../components/items/button-item'
     import LibraryButton from '../components/items/library-button'
+    import CommentsSection from '../components/CommentsSection'
     import routingBetween from '../mixins'
 
     import { mapGetters } from 'vuex'
@@ -126,7 +129,8 @@
             'read_more': ReadMore,
             BackButtonItem,
             ButtonItem,
-            LibraryButton
+            LibraryButton,
+            CommentsSection,
         },
         created() {
             this.id = this.$route.query.id;
