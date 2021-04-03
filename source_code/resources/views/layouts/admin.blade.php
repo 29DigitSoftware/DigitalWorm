@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
   <meta name="description" content=""/>
   <meta name="author" content=""/>
-  <title>Sauap Reader</title>
+  <title>DigitalWorm Reader</title>
   <!-- loader-->
   <link href="{{ asset('admin/assets/css/pace.min.css') }}" rel="stylesheet"/>
   <script src="{{ asset('admin/assets/js/pace.min.js') }}"></script>
@@ -38,7 +38,7 @@
    <div id="sidebar-wrapper" data-simplebar="" data-simplebar-auto-hide="true">
      <div class="brand-logo">
       <a href="{{ route('admin-home') }}">
-       <h5 class="logo-text">Sauap Reader</h5>
+       <h5 class="logo-text">DigitalWorm Reader</h5>
      </a>
    </div>
    <ul class="sidebar-menu do-nicescrol">
@@ -156,7 +156,7 @@
 	<footer class="footer">
       <div class="container">
         <div class="text-center">
-          Copyright © 2021 SauapSoft
+          Copyright © 2021 
         </div>
       </div>
     </footer>
