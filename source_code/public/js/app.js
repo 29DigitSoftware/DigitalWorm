@@ -5479,7 +5479,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   components: {
     CommentItem: function CommentItem() {
-      return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ../components/items/CommentItem */ "./resources/js/components/items/CommentItem.vue"));
+      return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../components/items/CommentItem */ "./resources/js/components/items/CommentItem.vue"));
     },
     CommentForm: _components_CommentForm__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
@@ -76228,7 +76228,7 @@ __webpack_require__.r(__webpack_exports__);
   path: '/test_process',
   name: 'test_process',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../views/TestProcess */ "./resources/js/views/TestProcess.vue"));
+    return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ../views/TestProcess */ "./resources/js/views/TestProcess.vue"));
   },
   meta: {
     title: "test_process"
@@ -76237,7 +76237,7 @@ __webpack_require__.r(__webpack_exports__);
   path: '/test_result',
   name: 'test_result',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ../views/TestResult */ "./resources/js/views/TestResult.vue"));
+    return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ../views/TestResult */ "./resources/js/views/TestResult.vue"));
   },
   meta: {
     title: "test_result"
