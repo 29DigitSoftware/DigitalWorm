@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-
 use App\Book;
+use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class SearchController extends Controller
 {
@@ -14,7 +15,7 @@ class SearchController extends Controller
 
         if ($req->input('fragment') == null)
             return response()->json(["message" => "Not found"], 404);
-        elseif($books-> isEmpty())
+        elseif ($books->isEmpty())
             return response()->json(["message" => "Not found"], 404);
         else {
             $response = [
@@ -25,13 +26,13 @@ class SearchController extends Controller
                 $user = Auth::guard('sanctum')->user();
             }
 
-            foreach($books as $book){
+            foreach ($books as $book) {
                 $data = [
-                    'id' => $book -> id,
-                    'title' => $book -> title, 
+                    'id' => $book->id,
+                    'title' => $book->title,
                     'author' => $book->authors_name()[0],
-                    'description' => $book -> description,
-                    'img' => $book -> img
+                    'description' => $book->description,
+                    'img' => $book->img
                 ];
                 if ($user != null) {
                     if ($user->hasBook($book))
@@ -47,5 +48,3 @@ class SearchController extends Controller
         }
     }
 }
-// state.searchResult.data.body = state.searchResult.data.body.concat(oldData);
-// state.searchResult.data.body = state.searchResult.data.body.concat(oldData);
