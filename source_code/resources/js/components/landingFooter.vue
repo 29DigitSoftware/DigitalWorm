@@ -8,7 +8,7 @@
                     <div class="col-md-6 order-2 order-md-1">
                         <div class="copyright-txt">
                             <span>Барлық құқық қорғалған ©2021 <a href="https://sauapsoft.kz"
-                                    target="_blank">SauapSoft</a>.
+                                    target="_blank"></a>.
                             </span>
                         </div>
                     </div>
