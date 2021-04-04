@@ -31,7 +31,7 @@
 
                         <div class="book_authors pt-2"> 
                             <span v-for="author in Content.authors" 
-                                :key=author.id 
+                                :key="author.id" 
                                 @click="routingBetween('author_info', author.id)"   
                                 class = "author_name"
                             >{{author.name}}</span>

@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Auth;
 
 class SearchController extends Controller
 {
-    public function get_search_from_books(Request $req) {
-        $books = Book::where('title', 'like', '%' . $req->input('fragment') . '%')->paginate(5);
-
+    public function get_search_from_books(Request $req)
+    {
+        $books = (object)DB::select("select * from books where description like %" . $req->input('fragment') . "% or title like %" . $req->input('fragment') . "%");
         if ($req->input('fragment') == null)
             return response()->json(["message" => "Not found"], 404);
         elseif ($books->isEmpty())
@@ -42,9 +42,7 @@ class SearchController extends Controller
                 }
                 array_push($response['body'], $data);
             }
-
-            $books['body'] = $response['body'];
-            return response(json_encode($books, JSON_UNESCAPED_UNICODE), 200);
+            return response(json_encode($response, JSON_UNESCAPED_UNICODE), 200);
         }
     }
 }
