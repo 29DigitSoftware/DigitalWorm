@@ -1,0 +1,33 @@
+1------
+select count(*) from sections, author_section, authors
+where sections.id = 4 and author_section.section_id = sections.id
+and authors.id = author_section.author_id;
+
+2------
+select count(*) from sections
+JOIN (author_section JOIN authors ON authors.id = author_section.author_id) 
+ON sections.id = 4 and author_section.section_id = sections.id;
+
+select count(*) from author_section
+JOIN (authors JOIN sections ON sections.id = 4) 
+ON authors.id = author_section.author_id
+and author_section.section_id = sections.id;
+
+select count(*) from authors
+JOIN (author_section JOIN sections ON sections.id = 4 and author_section.section_id = sections.id) 
+ON authors.id = author_section.author_id;
+
+3------
+select count(*) from author_section, authors
+where authors.id = author_section.author_id;
+
+select count(*) from sections, authors
+where sections.id = 4;
+
+select count(*) from sections, author_section
+where sections.id = 4 and author_section.section_id = sections.id;
+
+5---------
+TIME FOR testQuery: 0.00039958953857421875 seconds
+TIME FOR testQuery: 0.0003070831298828125 seconds
+TIME FOR testQuery: 0.00035262107849121094 seconds
