@@ -28,7 +28,6 @@ JOIN sections ON sections.id = 3)
 ON books.id = book_section.book_id AND sections.id = book_section.section_id;
 
 -- Step 3
-(orders ⋈ customer) ⋈ nation (20 + 20 = 40 tuples)
 select count(*) from book_user, books, book_section, sections
 where books.id = book_user.book_id
 AND books.id = book_section.book_id
