@@ -16,12 +16,15 @@ On authors.id = author_book.author_id AND
 authors.id = 6;
 
 -- Step 3
+(author_book ⋈ authors) ⋈ books (5 + 5 = 10 tuples)
 SELECT COUNT(*) from author_book, authors 
 where authors.id = author_book.author_id 
 AND authors.id = 6;
 
+(author_book ⋈ books) ⋈ authors (24054 + 5 = 24059 tuples)
 SELECT COUNT(*) from books, author_book where books.id = author_book.book_id;
 
+(books ⋈ authors) ⋈ author_book (12000 + 5 = 12015 tuples)
 SELECT COUNT(*) from books, authors where authors.id = 6;
 
 -- Step 4
