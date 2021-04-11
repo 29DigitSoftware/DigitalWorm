@@ -1,8 +1,10 @@
+-- Step 1
 select count(*) from books, book_section, sections where 
 books.id = book_section.book_id
 And sections.id = book_section.section_id
 And sections.id = 2;
 
+-- Step 2
 select count(*) from books
 Join (book_section join sections 
 on sections.id = book_section.section_id
@@ -18,6 +20,7 @@ on books.id = book_section.book_id) on
 sections.id = book_section.section_id
 And sections.id = 2;
 
+-- Step 3
 select count(*) from book_section, sections 
 where sections.id = book_section.section_id
 And sections.id = 2;
@@ -27,6 +30,26 @@ select count(*) from books, sections where sections.id = 2;
 select count(*) from books, book_section where 
 books.id = book_section.book_id;
 
+-- Step 4
+select count(*) from books, book_section, sections where 
+books.id = book_section.book_id
+And sections.id = book_section.section_id;
+
+-- Step 5
+select count(*) from books
+Join (book_section join sections 
+on sections.id = book_section.section_id
+And sections.id = 2) on 
+books.id = book_section.book_id;
 TIME FOR testQuery: 0.00035119056701660156 seconds
+
+select count(*) from book_section join(books join sections 
+on sections.id = 2) on books.id = book_section.book_id
+And sections.id = book_section.section_id;
 TIME FOR testQuery: 0.00033164024353027344 seconds
+
+select count(*) from sections join(books join book_section 
+on books.id = book_section.book_id) on 
+sections.id = book_section.section_id
+And sections.id = 2;
 TIME FOR testQuery: 0.0003998279571533203 seconds
