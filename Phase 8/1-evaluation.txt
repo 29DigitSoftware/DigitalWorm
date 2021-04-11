@@ -1,0 +1,75 @@
+-- Step 1
+select count(*) from users, book_user, books, book_section, sections
+where users.id = 1 
+AND books.id = book_user.book_id
+AND books.id = book_section.book_id
+AND sections.id = book_section.section_id
+AND sections.id = 3;
+
+-- Step 2
+select count(*) from users
+JOIN (books JOIN book_user ON books.id = book_user.book_id
+JOIN book_section ON books.id = book_section.book_id
+JOIN sections ON sections.id = book_section.section_id
+AND sections.id = 3) 
+ON users.id = 1;
+
+select count(*) from sections
+JOIN (books JOIN book_user ON books.id = book_user.book_id
+JOIN book_section ON books.id = book_section.book_id
+JOIN users ON users.id = 1) 
+ON sections.id = book_section.section_id
+AND sections.id = 3;
+
+select count(*) from book_section
+JOIN (books JOIN book_user ON books.id = book_user.book_id
+JOIN users ON users.id = 1
+JOIN sections ON sections.id = 3) 
+ON books.id = book_section.book_id AND sections.id = book_section.section_id;
+
+-- Step 3
+select count(*) from book_user, books, book_section, sections
+where books.id = book_user.book_id
+AND books.id = book_section.book_id
+AND sections.id = book_section.section_id
+AND sections.id = 3;
+
+select count(*) from users, book_user, books, book_section
+where users.id = 1 
+AND books.id = book_user.book_id
+AND books.id = book_section.book_id;
+
+select count(*) from users, book_user, books, sections
+where users.id = 1 
+AND books.id = book_user.book_id
+AND sections.id = 3;
+
+-- Step 4
+select count(*) from book_user, books, book_section, sections
+where books.id = book_user.book_id
+AND sections.id = book_section.section_id;
+
+-- Step 5
+select count(*) from users
+JOIN (books JOIN book_user ON books.id = book_user.book_id
+JOIN book_section ON books.id = book_section.book_id
+JOIN sections ON sections.id = book_section.section_id
+AND sections.id = 3) 
+ON users.id = 1;
+TIME FOR testQuery: 0.0003714561462402344 seconds
+
+select count(*) from sections
+JOIN (books JOIN book_user ON books.id = book_user.book_id
+JOIN book_section ON books.id = book_section.book_id
+JOIN users ON users.id = 1) 
+ON sections.id = book_section.section_id
+AND sections.id = 3;
+TIME FOR testQuery: 0.00033020973205566406 seconds
+
+select count(*) from book_section
+JOIN (books JOIN book_user ON books.id = book_user.book_id
+JOIN users ON users.id = 1
+JOIN sections ON sections.id = book_section.section_id
+AND sections.id = 3) 
+ON books.id = book_section.book_id;
+TIME FOR testQuery: 0.00039196014404296875 seconds
