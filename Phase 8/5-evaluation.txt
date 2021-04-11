@@ -15,10 +15,13 @@ JOIN (users JOIN book_user ON users.id = 1 and users.id = book_user.user_id)
 ON books.id = book_user.book_id;
 
 -- Step 3
+(book_user ⋈ books) ⋈ users (0 + 0 = 0 tuples)
 SELECT COUNT(*) from book_user, books where books.id = book_user.book_id;
 
+(users ⋈ books) ⋈ book_user (12000 + 0 = 12000 tuples)
 SELECT COUNT(*) from users, books where users.id = 1;
 
+(book_user ⋈ users) ⋈ books (0 + 0 = 0 tuples)
 SELECT COUNT(*) from users, book_user where users.id = book_user.user_id
 And users.id = 1
 
