@@ -1,7 +1,9 @@
+-- Step 1
 SELECT COUNT(*) from books, author_book, authors where books.id = author_book.book_id
 AND authors.id = author_book.author_id AND
 authors.id = 6;
 
+-- Step 2
 SELECT COUNT(*) from books
 Join (author_book join authors on authors.id = author_book.author_id 
 AND authors.id = 6) on books.id = author_book.book_id;
@@ -11,15 +13,33 @@ AND authors.id = author_book.author_id;
 
 SELECT COUNT(*) from authors join (author_book join books on books.id = author_book.book_id)
 On authors.id = author_book.author_id AND
- authors.id = 6;
-
-SELECT COUNT(*) from author_book, authors where authors.id = author_book.author_id AND
 authors.id = 6;
+
+-- Step 3
+SELECT COUNT(*) from author_book, authors 
+where authors.id = author_book.author_id 
+AND authors.id = 6;
 
 SELECT COUNT(*) from books, author_book where books.id = author_book.book_id;
 
 SELECT COUNT(*) from books, authors where authors.id = 6;
 
+-- Step 4
+SELECT COUNT(*) from books, author_book, authors 
+where books.id = author_book.book_id
+AND authors.id = author_book.author_id;
+
+-- Step 5
+SELECT COUNT(*) from books
+Join (author_book join authors on authors.id = author_book.author_id 
+AND authors.id = 6) on books.id = author_book.book_id;
 TIME FOR testQuery: 0.00038433074951171875 seconds
+
+SELECT COUNT(*) from author_book join (books join authors on authors.id = 6) on books.id = author_book.book_id
+AND authors.id = author_book.author_id;
 TIME FOR testQuery: 0.0003154277801513672 seconds
+
+SELECT COUNT(*) from authors join (author_book join books on books.id = author_book.book_id)
+On authors.id = author_book.author_id AND
+authors.id = 6;
 TIME FOR testQuery: 0.00034689903259277344 seconds
