@@ -21,13 +21,16 @@ ON authors.id = author_book.author_id
 AND authors.id = 1;
 
 -- Step 3
+(author_book ⋈ authors) ⋈ books (6 + 6 = 12 tuples)
 select COUNT(*) from  author_book, authors
 where authors.id = author_book.author_id
 AND authors.id = 1;
 
+(books ⋈ authors) ⋈ author_book (12000 + 6 = 12006 tuples)
 select COUNT(*) from books, authors
 where year(books.created_at) = '2021' and authors.id = 1;
 
+(books ⋈ author_book) ⋈ authors (24054 + 6 = 24060 tuples)
 select COUNT(*) from books, author_book
 where author_book.book_id = books.id
 AND year(books.created_at) = '2021';
