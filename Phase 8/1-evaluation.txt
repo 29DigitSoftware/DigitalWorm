@@ -28,6 +28,7 @@ JOIN sections ON sections.id = 3)
 ON books.id = book_section.book_id AND sections.id = book_section.section_id;
 
 -- Step 3
+(sections ⋈ book_user ⋈ books ⋈ book_section) ⋈ users (0 + 0 = 0 tuples)
 select count(*) from book_user, books, book_section, sections
 where books.id = book_user.book_id
 AND books.id = book_section.book_id
