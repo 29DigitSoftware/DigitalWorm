@@ -21,12 +21,15 @@ sections.id = book_section.section_id
 And sections.id = 2;
 
 -- Step 3
+(book_section ⋈ sections) ⋈ books (56 + 56 = 112 tuples)
 select count(*) from book_section, sections 
 where sections.id = book_section.section_id
 And sections.id = 2;
 
+(books ⋈ sections) ⋈ book_section (12000 + 56 = 12056 tuples)
 select count(*) from books, sections where sections.id = 2;
 
+(books ⋈ book_section) ⋈ sections (388 + 56 = 444 tuples)
 select count(*) from books, book_section where 
 books.id = book_section.book_id;
 
