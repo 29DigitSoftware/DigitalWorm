@@ -28,17 +28,20 @@ JOIN sections ON sections.id = 3)
 ON books.id = book_section.book_id AND sections.id = book_section.section_id;
 
 -- Step 3
+(orders ⋈ customer) ⋈ nation (20 + 20 = 40 tuples)
 select count(*) from book_user, books, book_section, sections
 where books.id = book_user.book_id
 AND books.id = book_section.book_id
 AND sections.id = book_section.section_id
 AND sections.id = 3;
 
+(users ⋈ book_user ⋈ books ⋈ book_section) ⋈ sections (8 + 0 = 8 tuples)
 select count(*) from users, book_user, books, book_section
 where users.id = 1 
 AND books.id = book_user.book_id
 AND books.id = book_section.book_id;
 
+(users ⋈ book_user ⋈ books ⋈ sections) ⋈ book_section (8 + 0 = 8 tuples)
 select count(*) from users, book_user, books, sections
 where users.id = 1 
 AND books.id = book_user.book_id
