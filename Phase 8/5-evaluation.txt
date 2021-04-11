@@ -1,7 +1,9 @@
+-- Step 1
 SELECT COUNT(*) from users, book_user, books where users.id = book_user.user_id
 And books.id = book_user.book_id
 And users.id = 1;
 
+-- Step 2
 SELECT COUNT(*) from users JOIN (book_user JOIN books ON books.id = book_user.book_id) ON users.id = book_user.user_id
 AND users.id = 1;
 
@@ -12,6 +14,7 @@ SELECT COUNT(*) from books
 JOIN (users JOIN book_user ON users.id = 1 and users.id = book_user.user_id)
 ON books.id = book_user.book_id;
 
+-- Step 3
 SELECT COUNT(*) from book_user, books where books.id = book_user.book_id;
 
 SELECT COUNT(*) from users, books where users.id = 1;
@@ -19,6 +22,21 @@ SELECT COUNT(*) from users, books where users.id = 1;
 SELECT COUNT(*) from users, book_user where users.id = book_user.user_id
 And users.id = 1
 
+-- Step 4
+SELECT COUNT(*) from users, book_user, books 
+where users.id = book_user.user_id
+And books.id = book_user.book_id;
+
+-- Step 5
+SELECT COUNT(*) from users JOIN (book_user JOIN books ON books.id = book_user.book_id) ON users.id = book_user.user_id
+AND users.id = 1;
 TIME FOR testQuery: 0.00023746490478515625 seconds
+
+SELECT COUNT(*) from book_user JOIN (users JOIN books ON users.id = 1) ON users.id = book_user.user_id
+AND books.id = book_user.book_id;
 TIME FOR testQuery: 0.00031566619873046875 seconds
+
+SELECT COUNT(*) from books 
+JOIN (users JOIN book_user ON users.id = 1 and users.id = book_user.user_id)
+ON books.id = book_user.book_id;
 TIME FOR testQuery: 0.00024771690368652344 seconds
