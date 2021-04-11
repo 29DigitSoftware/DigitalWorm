@@ -18,12 +18,15 @@ JOIN (author_section JOIN sections ON sections.id = 4 and author_section.section
 ON authors.id = author_section.author_id;
 
 -- Step 3
+(author_section ⋈ authors) ⋈ sections (334 + 0 = 334 tuples)
 select count(*) from author_section, authors
 where authors.id = author_section.author_id;
 
+(sections ⋈ authors) ⋈ author_section (5000 + 0 = 334 tuples)
 select count(*) from sections, authors
 where sections.id = 4;
 
+(sections ⋈ author_section) ⋈ authors (0 + 0 = 0 tuples)
 select count(*) from sections, author_section
 where sections.id = 4 and author_section.section_id = sections.id;
 
