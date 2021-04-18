@@ -1,0 +1,14 @@
+Query: 
+	select books.title from books
+  join author_book on author_book.book_id = books.id
+  join authors on authors.id = author_book.author_id
+  where year(books.created_at) = '2021' and authors.id = 1;
+
+Speed Tests:
+	1) 4 ms
+	2) 4.1 ms
+	3) 1 ms
+	4) 3.9 ms
+	5) 2.3 ms
+
+	Average: 3.06 ms
