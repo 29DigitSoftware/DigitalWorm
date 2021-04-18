@@ -1,0 +1,15 @@
+Query: 
+	select count(*) from books b 
+  join book_section bs
+  on b.id = bs.book_id
+  join sections s on s.id = bs.section_id
+  where s.id = 2;
+
+Speed Tests:
+	1) 0.79 ms
+	2) 0.6 ms
+	3) 0.6 ms
+	4) 1 ms
+	5) 0.3 ms
+
+	Average: 0.658 ms 
