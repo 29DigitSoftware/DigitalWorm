@@ -1,0 +1,16 @@
+Query: 
+	select books.title from users
+  join book_user bu on users.id = 1
+  join books on books.id = bu.book_id
+  join book_section on books.id = book_section.book_id
+  join sections on sections.id = book_section.section_id
+  where sections.id = 3;
+
+Speed Tests:
+	1) 0.1 ms
+	2) 0.7 ms
+	3) 0.7 ms
+	4) 0.4 ms
+	5) 0.4 ms
+
+	Average: 0.46 ms 
