@@ -1,0 +1,14 @@
+Query: 
+	select count(authors.id) from sections
+  join author_section on author_section.section_id = sections.id
+  join authors on authors.id = author_section.author_id
+  where sections.id = 4;
+
+Speed Tests:
+	1) 1 ms
+	2) 0.3 ms
+	3) 0.3 ms
+	4) 0.1 ms
+	5) 0.3 ms
+
+	Average: 0.4 ms
