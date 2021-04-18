@@ -1,0 +1,14 @@
+Query: 
+	select count(books.title), book_section.section_id from books
+  join book_section on book_section.book_id = books.id
+  where book_section.section_id in (select id from sections)
+  group by book_section.section_id;
+
+Speed Tests:
+	1) 0.001 ms
+	2) 0.000 ms
+	3) 0.002 ms
+	4) 0.001 ms
+	5) 0.001 ms
+
+	Average: 0.001 ms 
