@@ -1,0 +1,15 @@
+Query: 
+	select books.title from users
+  join book_user bu
+  on users.id = bu.user_id
+  join books on books.id = bu.book_id
+  where users.id = 1;
+
+Speed Tests:
+	1) 0.04 ms
+	2) 0.04 ms
+	3) 0.059 ms
+	4) 0.045 ms
+	5) 0.042 ms
+
+	Average: 0.0452 ms 
