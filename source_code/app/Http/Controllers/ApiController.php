@@ -120,7 +120,6 @@ class ApiController extends Controller
 
         return response(json_encode($response, JSON_UNESCAPED_UNICODE), 200);
     }
-
     /**
      * return sections content
      */
@@ -250,7 +249,6 @@ class ApiController extends Controller
 
         return response(json_encode($response, JSON_UNESCAPED_UNICODE), 200); 
     }
-
     /*
         Return user profile info
     */
@@ -373,4 +371,59 @@ class ApiController extends Controller
         
         return response(json_encode($response, JSON_UNESCAPED_UNICODE), 200);
     }
+
+    public function get_numbookInsec($id){
+        $response = DB::select("select count(*) from books b 
+        join book_section bs
+        on b.id = bs.book_id
+        join sections s on s.id = bs.section_id
+        where s.id =".$id);
+        return response(json_encode($response, JSON_UNESCAPED_UNICODE), 200); 
+    }
+    public function desc_info($id){
+        $response = DB::select("select count(authors.id) from sections
+        join author_section on author_section.section_id = sections.id
+        join authors on authors.id = author_section.author_id
+        where sections.id =".$id);
+        return response(json_encode($response, JSON_UNESCAPED_UNICODE), 200); 
+    }
+    public function get_numAuthorInSec($id){
+        $response = DB::select("select books.description from books
+        join author_book on books.id = author_book.book_id
+        join authors on authors.id = author_book.author_id
+        where authors.id =".$id);
+        return response(json_encode($response, JSON_UNESCAPED_UNICODE), 200);
+    }
+    public function get_bookInThisYear(Request $request){
+        $response = DB::select("select books.title from books
+        join author_book on author_book.book_id = books.id
+        join authors on authors.id = author_book.author_id
+        where year(books.created_at) = ". $request['year'] ."  and authors.id =". $request['id']);
+        return response(json_encode($response, JSON_UNESCAPED_UNICODE), 200);
+    }
+    public function get_NumBooksEachSection(){
+        $response = DB::select("select count(books.title), book_section.section_id from books
+        join book_section on book_section.book_id = books.id
+        where book_section.section_id in (select id from sections)
+        group by book_section.section_id");
+        return response(json_encode($response, JSON_UNESCAPED_UNICODE), 200);
+    }
+    public function get_MyBooks(){
+        $response = DB::select("select books.title from users
+        join book_user bu
+        on users.id = bu.user_id
+        join books on books.id = bu.book_id
+        where users.id =".Auth::user()->id);
+        return response(json_encode($response, JSON_UNESCAPED_UNICODE), 200);
+    }
+    public function get_MyBooksInSection(Request $request){
+        $response = DB::select("select books.title from users
+        join book_user bu on users.id =". Auth::user()->id ."
+        join books on books.id = bu.book_id
+        join book_section on books.id = book_section.book_id
+        join sections on sections.id = book_section.section_id
+        where sections.id =".$request['id']);
+        return response(json_encode($response, JSON_UNESCAPED_UNICODE), 200);
+    }
+
 }

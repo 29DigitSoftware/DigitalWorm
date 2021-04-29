@@ -46,3 +46,11 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::post('/library/delete', 'ApiController@library_delete');
     Route::get('/library/books', 'ApiController@get_library_books');
 });
+
+Route::get('/numbookInsec/{id}', 'ApiController@get_numbookInsec');// done
+Route::get('/descFromAuthor/{id}', 'ApiController@desc_info');
+Route::get('/numAuthorInSec/{id}', 'ApiController@get_numAuthorInSec');
+Route::post('/inThisYear', 'ApiController@get_bookInThisYear');
+Route::get('/NumBooksEachSection', 'ApiController@get_NumBooksEachSection');
+Route::post('/MyBooks', 'ApiController@get_MyBooks')->middleware('auth:sanctum');
+Route::post('/MyBooksInSection', 'ApiController@get_MyBooksInSection')->middleware('auth:sanctum');
