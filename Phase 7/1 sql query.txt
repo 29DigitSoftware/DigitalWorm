@@ -1,0 +1,6 @@
+select books.title from users
+join book_user bu on users.id = bu.id
+join books on books.id = bu.book_id
+join book_section on books.id = book_section.book_id
+join sections on sections.id = book_section.section_id
+where sections.id = 3
