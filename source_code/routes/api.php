@@ -54,3 +54,6 @@ Route::post('/inThisYear', 'ApiController@get_bookInThisYear');
 Route::get('/NumBooksEachSection', 'ApiController@get_NumBooksEachSection');
 Route::post('/MyBooks', 'ApiController@get_MyBooks')->middleware('auth:sanctum');
 Route::post('/MyBooksInSection', 'ApiController@get_MyBooksInSection')->middleware('auth:sanctum');
+Route::post('/MyBooksInSecTitle', 'ApiController@get_MyBooksInSecTitle')->middleware('auth:sanctum');
+Route::post('/SearchByTitleAuthor', 'ApiController@get_SearchByTitleAuthor');
+

@@ -425,5 +425,20 @@ class ApiController extends Controller
         where sections.id =".$request['id']);
         return response(json_encode($response, JSON_UNESCAPED_UNICODE), 200);
     }
-
+    public function get_MyBooksInSecTitle(Request $request){
+        $response = DB::select("select books.title from users
+        join book_user bu on users.id =". Auth::user()->id ." and bu.user_id = users.id
+        join books on books.id = bu.book_id
+        join book_section on books.id = book_section.book_id
+        join sections on sections.id = book_section.section_id
+        where sections.title =".$request['title']);
+        return response(json_encode($response, JSON_UNESCAPED_UNICODE), 200);
+    }
+    public function get_SearchByTitleAuthor(Request $request){
+        $response = DB::select("select books.title from books
+        join author_book on author_book.book_id = books.id
+        join authors on authors.id = author_book.author_id
+        where books.title like '%". $request['title'] ."%' and authors.id =". $request['id']);
+        return response(json_encode($response, JSON_UNESCAPED_UNICODE), 200);
+    }
 }
