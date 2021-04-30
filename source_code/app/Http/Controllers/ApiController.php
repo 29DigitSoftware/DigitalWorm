@@ -396,7 +396,7 @@ class ApiController extends Controller
         return response(json_encode($response, JSON_UNESCAPED_UNICODE), 200); 
     }
     public function get_numAuthorInSec($id){
-        $response = DB::select("select books.description from books
+        $response = DB::select("select books.id, books.title, books.description from books
         join author_book on books.id = author_book.book_id
         join authors on authors.id = author_book.author_id
         where authors.id =".$id);

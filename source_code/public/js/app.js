@@ -8029,7 +8029,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         title: "Авторлар"
       },
       BooksInSection: [],
-      selected: ''
+      selected: '',
+      books: []
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])(['base_url'])),
@@ -8045,6 +8046,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       var id = this.$route.query.id;
+      axios.get("/api/numAuthorInSec/" + id).then(function (response) {
+        console.log(response.data);
+        _this.books = response.data;
+      });
       axios.get("/api/author/" + id).then(function (response) {
         console.log(response.data);
         _this.Content = response.data;
@@ -8117,6 +8122,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -8125,15 +8137,33 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      title: "Авторлар"
+      title: "Авторлар",
+      numberOfAuthors: null
     };
   },
   components: {
     'author': _components_section_items_HorizontalAuthorInfo__WEBPACK_IMPORTED_MODULE_0__["default"],
     CustomHeader: _components_custom_header__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
+  mounted: function mounted() {
+    this.NUmberOfAuthors();
+  },
   mixins: [_mixins__WEBPACK_IMPORTED_MODULE_2__["default"], _mixins__WEBPACK_IMPORTED_MODULE_2__["default"]],
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])(['base_url', 'Section', 'isSectionLoaded'])),
+  methods: {
+    NUmberOfAuthors: function NUmberOfAuthors() {
+      var _this = this;
+
+      console.log("fsdfsd"); // var token = localStorage.getItem('access_token')
+
+      var id = this.$route.query.id;
+      axios.get("/api/descFromAuthor/" + id).then(function (response) {
+        console.log("number of books");
+        console.log(response.data[0]["count(authors.id)"]);
+        _this.numberOfAuthors = response.data[0]["count(authors.id)"];
+      });
+    }
+  },
   created: function created() {
     if (!this.isSectionLoaded) this.fetchData(this.$route.query.id);
   }
@@ -51935,7 +51965,7 @@ var render = function() {
     [
       _c("author-header", { attrs: { Author: _vm.Content } }),
       _vm._v(" "),
-      _c("books-collection", { attrs: { Content: _vm.Content.books } }),
+      _c("books-collection", { attrs: { Content: _vm.books } }),
       _vm._v(" "),
       _c("div", { staticClass: "container" }, [
         _c("div", { staticClass: "row" }, [
@@ -52025,6 +52055,20 @@ var render = function() {
     { staticClass: "wrapper" },
     [
       _c("custom-header", { attrs: { title: _vm.title } }),
+      _vm._v(" "),
+      _vm.numberOfAuthors
+        ? _c(
+            "p",
+            { staticClass: "text-center mb-4 font-weight-bold first-text" },
+            [
+              _vm._v(
+                "\n      Number of books in section  " +
+                  _vm._s(_vm.numberOfAuthors) +
+                  "\n    "
+              )
+            ]
+          )
+        : _vm._e(),
       _vm._v(" "),
       _vm.isValid(_vm.Section.body)
         ? _c(

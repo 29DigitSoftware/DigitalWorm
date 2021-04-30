@@ -4,6 +4,13 @@
             :title='title'
         />
 
+        <p 
+            v-if="numberOfAuthors"
+            class="text-center mb-4 font-weight-bold first-text"
+        >
+          Number of books in section  {{ numberOfAuthors }}
+        </p>
+
         <div 
             v-if='isValid(Section.body)'
         >
@@ -40,6 +47,7 @@
         data(){
             return {
                 title: "Авторлар",
+                numberOfAuthors: null
             };
         },
         
@@ -48,10 +56,26 @@
             CustomHeader
         },
 
+        mounted(){
+            this.NUmberOfAuthors()
+        },
         mixins: [fetchData, isValid],
         computed: {
             ...mapGetters(['base_url', 'Section', 'isSectionLoaded']),
         }, 
+        methods: {
+            NUmberOfAuthors(){
+                console.log("fsdfsd");
+                // var token = localStorage.getItem('access_token')
+                let id = this.$route.query.id;
+                axios.get("/api/descFromAuthor/" + id,
+                ).then(response => {
+                    console.log("number of books");
+                    console.log(response.data[0]["count(authors.id)"]);
+                    this.numberOfAuthors = response.data[0]["count(authors.id)"];
+                });
+            }
+        },
         created(){
             if( !this.isSectionLoaded )
                 this.fetchData(this.$route.query.id);

@@ -6,7 +6,7 @@
         />
 
         <books-collection 
-            :Content="Content.books"
+            :Content="books"
         />
 
         <div class="container">
@@ -47,7 +47,8 @@
                     title: "Авторлар",
                 },
                 BooksInSection: [],
-                selected: ''
+                selected: '',
+                books: [],
             };
         },
         
@@ -67,6 +68,13 @@
             
             fetchAuthor(){
                 var id = this.$route.query.id;
+
+                axios.get("/api/numAuthorInSec/" + id)
+                .then(
+                    response => {
+                        console.log(response.data);
+                        this.books = response.data
+                    });   
 
                 axios.get("/api/author/" + id)
                 .then(
