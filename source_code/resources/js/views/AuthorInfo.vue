@@ -8,6 +8,27 @@
         <books-collection 
             :Content="Content.books"
         />
+
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h1> By Year </h1>
+                    <input v-model="selected" placeholder="enter section title">
+                    <p> years is: {{ selected }}</p>
+                    <button class="btn primary" @click="fetchBooksByYear" >
+                        Sort by year
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div v-if="BooksInSection.length > 0" >
+                    <h1> Books By Year {{ selected }} </h1>
+                    <books-collection 
+                        :Content="BooksInSection"
+                    />
+                </div>
+            </div>
+        </div>
         
     </div>
 </template>
@@ -25,6 +46,8 @@
                 Content: {
                     title: "Авторлар",
                 },
+                BooksInSection: [],
+                selected: ''
             };
         },
         
@@ -53,6 +76,22 @@
                     });   
             },
             
+
+            fetchBooksByYear(){
+                var token = localStorage.getItem('access_token')
+                let id = this.$route.query.id;
+                axios.post("/api/inThisYear",
+                    {
+                        "year": this.selected,
+                        "id": id
+                    },
+                ).then(response => {
+                    console.log("library books");
+                    console.log(response.data);
+                    this.BooksInSection = response.data;
+                });
+            }
+
         },
         
     }

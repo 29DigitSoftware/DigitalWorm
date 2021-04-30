@@ -7997,6 +7997,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -8006,7 +8027,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       title: "Авторлар",
       Content: {
         title: "Авторлар"
-      }
+      },
+      BooksInSection: [],
+      selected: ''
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])(['base_url'])),
@@ -8025,6 +8048,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       axios.get("/api/author/" + id).then(function (response) {
         console.log(response.data);
         _this.Content = response.data;
+      });
+    },
+    fetchBooksByYear: function fetchBooksByYear() {
+      var _this2 = this;
+
+      var token = localStorage.getItem('access_token');
+      var id = this.$route.query.id;
+      axios.post("/api/inThisYear", {
+        "year": this.selected,
+        "id": id
+      }).then(function (response) {
+        console.log("library books");
+        console.log(response.data);
+        _this2.BooksInSection = response.data;
       });
     }
   }
@@ -8164,6 +8201,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -8171,12 +8215,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      title: 'Loading'
+      title: 'Loading',
+      numberOfBooks: null
     };
   },
   components: {
     ColoredHeader: _components_colored_header_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     BooksCollection: _components_books_collection_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  mounted: function mounted() {
+    this.NumberOfBooksInSection();
+  },
+  methods: {
+    NumberOfBooksInSection: function NumberOfBooksInSection() {
+      var _this = this;
+
+      console.log("fsdfsd"); // var token = localStorage.getItem('access_token')
+
+      var id = this.$route.query.id;
+      axios.get("/api/numbookInsec/" + id).then(function (response) {
+        console.log("number of books");
+        console.log(response.data[0]["count(*)"]);
+        _this.numberOfBooks = response.data[0]["count(*)"];
+      });
+    }
   },
   mixins: [_mixins__WEBPACK_IMPORTED_MODULE_3__["default"]],
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['Section', 'isSectionLoaded'])),
@@ -51873,7 +51935,65 @@ var render = function() {
     [
       _c("author-header", { attrs: { Author: _vm.Content } }),
       _vm._v(" "),
-      _c("books-collection", { attrs: { Content: _vm.Content.books } })
+      _c("books-collection", { attrs: { Content: _vm.Content.books } }),
+      _vm._v(" "),
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col" }, [
+            _c("h1", [_vm._v(" By Year ")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.selected,
+                  expression: "selected"
+                }
+              ],
+              attrs: { placeholder: "enter section title" },
+              domProps: { value: _vm.selected },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.selected = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("p", [_vm._v(" years is: " + _vm._s(_vm.selected))]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn primary",
+                on: { click: _vm.fetchBooksByYear }
+              },
+              [_vm._v("\n                    Sort by year\n                ")]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _vm.BooksInSection.length > 0
+            ? _c(
+                "div",
+                [
+                  _c("h1", [
+                    _vm._v(" Books By Year " + _vm._s(_vm.selected) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("books-collection", {
+                    attrs: { Content: _vm.BooksInSection }
+                  })
+                ],
+                1
+              )
+            : _vm._e()
+        ])
+      ])
     ],
     1
   )
@@ -51983,6 +52103,20 @@ var render = function() {
       _c("colored-header", {
         attrs: { title: _vm.Section.title, colorStyle: "green", Search: "true" }
       }),
+      _vm._v(" "),
+      _vm.numberOfBooks
+        ? _c(
+            "p",
+            { staticClass: "text-center mb-4 font-weight-bold first-text" },
+            [
+              _vm._v(
+                "\n      Number of books in section  " +
+                  _vm._s(_vm.numberOfBooks) +
+                  "\n    "
+              )
+            ]
+          )
+        : _vm._e(),
       _vm._v(" "),
       _c("books-collection", { attrs: { Content: _vm.Section.body } })
     ],
