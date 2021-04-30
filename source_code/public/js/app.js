@@ -8018,6 +8018,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -8030,7 +8051,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       },
       BooksInSection: [],
       selected: '',
-      books: []
+      books: [],
+      fragment: '',
+      foundBooks: []
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])(['base_url'])),
@@ -8067,6 +8090,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         console.log("library books");
         console.log(response.data);
         _this2.BooksInSection = response.data;
+      });
+    },
+    SearchByTitleAuthor: function SearchByTitleAuthor() {
+      var _this3 = this;
+
+      var token = localStorage.getItem('access_token');
+      var id = this.$route.query.id;
+      axios.post("/api/SearchByTitleAuthor", {
+        "title": this.fragment,
+        "id": id
+      }).then(function (response) {
+        console.log("found books");
+        console.log(response.data);
+        _this3.foundBooks = response.data;
       });
     }
   }
@@ -52018,6 +52055,62 @@ var render = function() {
                   _c("books-collection", {
                     attrs: { Content: _vm.BooksInSection }
                   })
+                ],
+                1
+              )
+            : _vm._e()
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col" }, [
+            _c("h1", [_vm._v(" By Title ")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.fragment,
+                  expression: "fragment"
+                }
+              ],
+              attrs: { placeholder: "enter section title" },
+              domProps: { value: _vm.fragment },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.fragment = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("p", [_vm._v(" Title is: " + _vm._s(_vm.fragment))]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn primary",
+                on: { click: _vm.SearchByTitleAuthor }
+              },
+              [_vm._v("\n                    Sort by Title\n                ")]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _vm.foundBooks.length > 0
+            ? _c(
+                "div",
+                [
+                  _c("h1", [
+                    _vm._v(" Books By Title " + _vm._s(_vm.fragment) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("books-collection", { attrs: { Content: _vm.foundBooks } })
                 ],
                 1
               )

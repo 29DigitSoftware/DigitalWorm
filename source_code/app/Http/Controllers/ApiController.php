@@ -440,4 +440,13 @@ class ApiController extends Controller
         return response(json_encode($response, JSON_UNESCAPED_UNICODE), 200);
     }
 
+
+    public function get_SearchByTitleAuthor(Request $request){
+        $response = DB::select("select books.id, books.title, books.description from books
+        join author_book on author_book.book_id = books.id
+        join authors on authors.id = author_book.author_id
+        where books.title like '%". $request['title'] ."%' and authors.id =". $request['id']);
+        return response(json_encode($response, JSON_UNESCAPED_UNICODE), 200);
+    }
+
 }

@@ -30,6 +30,27 @@
             </div>
         </div>
         
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h1> By Title </h1>
+                    <input v-model="fragment" placeholder="enter section title">
+                    <p> Title is: {{ fragment }}</p>
+                    <button class="btn primary" @click="SearchByTitleAuthor" >
+                        Sort by Title
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div v-if="foundBooks.length > 0" >
+                    <h1> Books By Title {{ fragment }} </h1>
+                    <books-collection 
+                        :Content="foundBooks"
+                    />
+                </div>
+            </div>
+        </div>
+
     </div>
 </template>
 
@@ -49,6 +70,8 @@
                 BooksInSection: [],
                 selected: '',
                 books: [],
+                fragment: '',
+                foundBooks: []
             };
         },
         
@@ -97,6 +120,21 @@
                     console.log("library books");
                     console.log(response.data);
                     this.BooksInSection = response.data;
+                });
+            },
+
+            SearchByTitleAuthor(){
+                var token = localStorage.getItem('access_token')
+                let id = this.$route.query.id;
+                axios.post("/api/SearchByTitleAuthor",
+                    {
+                        "title": this.fragment,
+                        "id": id
+                    },
+                ).then(response => {
+                    console.log("found books");
+                    console.log(response.data);
+                    this.foundBooks = response.data;
                 });
             }
 
