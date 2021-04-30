@@ -12,7 +12,8 @@ class SearchController extends Controller
 {
     public function get_search_from_books(Request $req)
     {
-        $books = (object)DB::select("select * from books where description like %" . $req->input('fragment') . "% or title like %" . $req->input('fragment') . "%");
+        $books = Book::where('title', 'like', '%' . $req->input('fragment') . '%')->paginate(5);
+
         if ($req->input('fragment') == null)
             return response()->json(["message" => "Not found"], 404);
         elseif ($books->isEmpty())
@@ -42,7 +43,9 @@ class SearchController extends Controller
                 }
                 array_push($response['body'], $data);
             }
-            return response(json_encode($response, JSON_UNESCAPED_UNICODE), 200);
+
+            $books['body'] = $response['body'];
+            return response(json_encode($books, JSON_UNESCAPED_UNICODE), 200);
         }
     }
 }
