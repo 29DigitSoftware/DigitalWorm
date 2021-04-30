@@ -418,7 +418,7 @@ class ApiController extends Controller
     }
     public function get_MyBooksInSection(Request $request){
         $response = DB::select("select books.title from users
-        join book_user bu on users.id =". Auth::user()->id ."
+        join book_user bu on users.id =". Auth::user()->id ." and bu.user_id = users.id
         join books on books.id = bu.book_id
         join book_section on books.id = book_section.book_id
         join sections on sections.id = book_section.section_id
