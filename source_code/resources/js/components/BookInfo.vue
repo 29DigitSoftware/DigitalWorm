@@ -152,7 +152,7 @@
                 }
 
                 let id = this.Content.id;
-                id = Math.max(id % 101, 1);
+                id = Math.max(id % 100, 1);
 
                 this.$router.push({ 
                     name: 'reader', 
