@@ -7,8 +7,8 @@
     
         <div>
             <books-scroll 
-                v-if="library.Loaded === undefined && library.books.length > 0"
-                :books="library.books"
+                v-if="library === undefined && library.length > 0"
+                :books="library"
             >
                 <section-header 
                     title="Кітапхана" 

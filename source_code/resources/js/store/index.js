@@ -202,25 +202,25 @@ const mainPageModule = {
         },
         setLibrary(state, data) {
             state.library = data;
-            for (let i = 0; i < state.library.books.length; i++)
-                state.library.books[i].is_added = true
+            for (let i = 0; i < state.library.length; i++)
+                state.library[i].is_added = true
 
         },
         addBookToLibrary(state, book) {
             let bookExists = false
-            for (let i = 0; i < state.library.books.length; i++)
-                if (state.library.books[i].id === book.id)
+            for (let i = 0; i < state.library.length; i++)
+                if (state.library[i].id === book.id)
                     bookExists = true
 
             if (bookExists)
-                state.library.books.push(book);
+                state.library.push(book);
         },
         deleteBookFromLibrary(state, book) {
             console.log(book)
-            for (let i = 0; i < state.library.books.length; i++) {
-                if (state.library.books[i].id === book.id) {
-                    console.log(state.library.books[i])
-                    state.library.books.splice(i, 1);
+            for (let i = 0; i < state.library.length; i++) {
+                if (state.library[i].id === book.id) {
+                    console.log(state.library[i])
+                    state.library.splice(i, 1);
                     break
                 }
             }
@@ -373,16 +373,24 @@ const mainPageModule = {
         }) {
 
             var token = localStorage.getItem('access_token')
-            axios.defaults.headers.common["Authorization"] =
-                "Bearer " + token;
+                // axios.defaults.headers.common["Authorization"] =
+                //     "Token " + token;
 
-            axios.get("/api/library/books").then(response => {
+            axios.post("/api/MyBooks",
+
+                {
+                    heades: {
+                        "Authorization": "Token " + token
+                    }
+                }
+
+            ).then(response => {
                 console.log("library books");
                 console.log(response.data);
                 commit("setLibrary", response.data);
             }).catch(error => {
-                console.log("token out of date");
-                dispatch('destroyToken');
+                // console.log("token out of date");
+                // dispatch('destroyToken');
                 commit('setLibrary', state.libraryDefault);
             });;
         },

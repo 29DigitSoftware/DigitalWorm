@@ -417,7 +417,7 @@ class ApiController extends Controller
         return response(json_encode($response, JSON_UNESCAPED_UNICODE), 200);
     }
     public function get_MyBooks(){
-        $response = DB::select("select books.title from users
+        $response = DB::select("select books.id, books.title, books.description from users
         join book_user bu
         on users.id = bu.user_id
         join books on books.id = bu.book_id
@@ -425,12 +425,18 @@ class ApiController extends Controller
         return response(json_encode($response, JSON_UNESCAPED_UNICODE), 200);
     }
     public function get_MyBooksInSection(Request $request){
-        $response = DB::select("select books.title from users
-        join book_user bu on users.id =". Auth::user()->id ."
+        $response = DB::select("select distinct books.id, books.title, books.description from users
+        join book_user bu on users.id =". Auth::user()->id ." and bu.user_id = users.id
         join books on books.id = bu.book_id
         join book_section on books.id = book_section.book_id
         join sections on sections.id = book_section.section_id
         where sections.id =".$request['id']);
+        // $response = DB::select("select distinct books.id, books.title, books.description from users
+        // join book_user bu on users.id =". Auth::user()->id ." and bu.user_id = users.id
+        // join books on books.id = bu.book_id
+        // join book_section on books.id = book_section.book_id
+        // join sections on sections.id = book_section.section_id
+        // where sections.title =".$request['id']);
         return response(json_encode($response, JSON_UNESCAPED_UNICODE), 200);
     }
 

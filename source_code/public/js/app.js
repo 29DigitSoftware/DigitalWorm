@@ -8435,13 +8435,37 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      title: 'Loading'
+      title: 'Loading',
+      BooksInSection: [],
+      selected: ''
     };
   },
   created: function created() {
@@ -8453,6 +8477,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   components: {
     ColoredHeader: _components_colored_header_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     BooksCollection: _components_books_collection_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  methods: {
+    fetchBooksBySection: function fetchBooksBySection() {
+      var _this = this;
+
+      var token = localStorage.getItem('access_token');
+      axios.post("/api/MyBooksInSection", {
+        "id": this.selected
+      }).then(function (response) {
+        console.log("library books");
+        console.log(response.data);
+        _this.BooksInSection = response.data;
+      });
+    }
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['library', 'profile']))
 });
@@ -52103,10 +52141,10 @@ var render = function() {
       _c(
         "div",
         [
-          _vm.library.Loaded === undefined && _vm.library.books.length > 0
+          _vm.library === undefined && _vm.library.length > 0
             ? _c(
                 "books-scroll",
-                { attrs: { books: _vm.library.books } },
+                { attrs: { books: _vm.library } },
                 [
                   _c("section-header", {
                     attrs: { title: "Кітапхана", id: 0, path: "library" }
@@ -52220,11 +52258,67 @@ var render = function() {
         attrs: { title: "Library", colorStyle: "green", Search: true }
       }),
       _vm._v(" "),
-      _vm.library.Loaded || _vm.library.books.length == 0
+      _vm.library.length == 0
         ? _c("p", { staticClass: "text-center font-weight-bold first-text" }, [
             _vm._v("\n        Kitap joq!\n    ")
           ])
-        : _c("books-collection", { attrs: { Content: _vm.library.books } })
+        : _c("books-collection", { attrs: { Content: _vm.library } }),
+      _vm._v(" "),
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col" }, [
+            _c("h1", [_vm._v(" By section ID ")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.selected,
+                  expression: "selected"
+                }
+              ],
+              attrs: { placeholder: "enter section title" },
+              domProps: { value: _vm.selected },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.selected = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("p", [_vm._v("section title is: " + _vm._s(_vm.selected))]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn primary",
+                on: { click: _vm.fetchBooksBySection }
+              },
+              [_vm._v("\n                    Sort by ID\n                ")]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _vm.BooksInSection.length > 0
+            ? _c(
+                "div",
+                [
+                  _c("h1", [_vm._v(" Books By Section ID ")]),
+                  _vm._v(" "),
+                  _c("books-collection", {
+                    attrs: { Content: _vm.BooksInSection }
+                  })
+                ],
+                1
+              )
+            : _vm._e()
+        ])
+      ])
     ],
     1
   )
@@ -76485,26 +76579,26 @@ var mainPageModule = {
     setLibrary: function setLibrary(state, data) {
       state.library = data;
 
-      for (var i = 0; i < state.library.books.length; i++) {
-        state.library.books[i].is_added = true;
+      for (var i = 0; i < state.library.length; i++) {
+        state.library[i].is_added = true;
       }
     },
     addBookToLibrary: function addBookToLibrary(state, book) {
       var bookExists = false;
 
-      for (var i = 0; i < state.library.books.length; i++) {
-        if (state.library.books[i].id === book.id) bookExists = true;
+      for (var i = 0; i < state.library.length; i++) {
+        if (state.library[i].id === book.id) bookExists = true;
       }
 
-      if (bookExists) state.library.books.push(book);
+      if (bookExists) state.library.push(book);
     },
     deleteBookFromLibrary: function deleteBookFromLibrary(state, book) {
       console.log(book);
 
-      for (var i = 0; i < state.library.books.length; i++) {
-        if (state.library.books[i].id === book.id) {
-          console.log(state.library.books[i]);
-          state.library.books.splice(i, 1);
+      for (var i = 0; i < state.library.length; i++) {
+        if (state.library[i].id === book.id) {
+          console.log(state.library[i]);
+          state.library.splice(i, 1);
           break;
         }
       }
@@ -76621,15 +76715,20 @@ var mainPageModule = {
     var commit = _ref9.commit,
         state = _ref9.state,
         dispatch = _ref9.dispatch;
-    var token = localStorage.getItem('access_token');
-    axios__WEBPACK_IMPORTED_MODULE_2___default.a.defaults.headers.common["Authorization"] = "Bearer " + token;
-    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/library/books").then(function (response) {
+    var token = localStorage.getItem('access_token'); // axios.defaults.headers.common["Authorization"] =
+    //     "Token " + token;
+
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/api/MyBooks", {
+      heades: {
+        "Authorization": "Token " + token
+      }
+    }).then(function (response) {
       console.log("library books");
       console.log(response.data);
       commit("setLibrary", response.data);
     })["catch"](function (error) {
-      console.log("token out of date");
-      dispatch('destroyToken');
+      // console.log("token out of date");
+      // dispatch('destroyToken');
       commit('setLibrary', state.libraryDefault);
     });
     ;
